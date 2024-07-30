@@ -1,0 +1,32 @@
+<!--<!DOCTYPE html>-->
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <title>Login Page</title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+    <body>
+        <selection class="login-form">
+            <h1>UPIT LATTE</h1>
+            <form action="/api/user/login" method="post">
+                <div class="int-area">
+                    <input type="text" name="id" id="id" autocomplete="off" required>
+                    <label for="id">USER NAME</label>
+                </div>
+                <div class="int-area">
+                    <input type="password" name="pw" id="pw" autocomplete="off" required>
+                    <label for="id">PASSWORD</label>
+                </div>
+                <div class="btn-area">
+                    <button type="submit">LOGIN</button>
+                </div>
+                <div class="caption">
+                    <a href="/join">JOIN HEAR!!</a>
+                </div>
+                <div class="caption">
+                    <a href="">Forgot Password?</a>
+                </div>
+            </form>
+        </selection>
+    </body>
+</html>

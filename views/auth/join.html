@@ -1,0 +1,38 @@
+<!--<!DOCTYPE html>-->
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <title>Join Page</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<selection class="login-form">
+    <h1>UPIT LATTE</h1>
+    <form action="/api/user/join" method="post">
+        <div class="int-area">
+            <input type="text" name="id" id="id" autocomplete="off" required>
+            <label for="id">USER NAME</label>
+        </div>
+        <div class="int-area">
+            <input type="password" name="pw" id="pw" autocomplete="off" required>
+            <label for="id">PASSWORD</label>
+        </div>
+        <div class="int-area">
+            <input type="password" name="pwc" id="pwc" autocomplete="off" required>
+            <label for="id">PASSWORD CHECK</label>
+        </div>
+        <div class="int-area">
+            <input type="email" name="email" id="email" autocomplete="off" required pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*">
+            <label for="id">E-MAIL</label>
+        </div>
+        <div class="int-area">
+            <input type="" name="num" id="num" autocomplete="off" required>
+            <label for="id">사업자번호</label>
+        </div>
+        <div class="btn-area">
+            <button type="submit">JOIN</button>
+        </div>
+    </form>
+</selection>
+</body>
+</html>
