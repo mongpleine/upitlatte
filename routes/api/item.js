@@ -6,11 +6,13 @@ const api = require('../../controllers')
 module.exports = function () {
 
     router.post('/item/add',
+        api.user.authCheck,
         api.item.addItem
     )
 
     router.get('/item/list',
-        api.item.itemList
+        api.user.authCheck,
+        api.item.getItemList
     )
 
     return router;

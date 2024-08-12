@@ -6,8 +6,8 @@ const controller = {
     login(req, res, next) {
         let context = {
             data: {
-                id: req.body.ids,
-                password: req.body.pws
+                id: req.body.id,
+                password: req.body.pw
             }
         }
         try {
@@ -21,10 +21,10 @@ const controller = {
                     .then(context => {
                         if (context.result) {
                             res.statusCode = 200;
-                            res.redirect('/index');
+                            return res.cookie("userdata", context.result).redirect('/product');
                         } else {
                             res.statusCode = 403;
-                            res.redirect('/login');
+                            return res.redirect('/login');
                         }
                     });
             })
@@ -38,7 +38,7 @@ const controller = {
                 id: req.body.id,
                 password: req.body.pw,
                 email: req.body.email,
-                num: req.body.num
+                eid: req.body.eid
             }
         }
 
@@ -51,19 +51,66 @@ const controller = {
                         return context;
                     })
                     .then(context => {
-                        if (context.result) {
+                        if (context.result === 200) {
                             res.statusCode = 200;
-                            res.redirect('/login');
+                            return res.redirect('/login');
                         } else {
                             res.statusCode = 403;
-                            res.redirect('/join');
+                            return res.send("<script>history.back(); alert('이미 가입한 메일주소 입니다.');</script>");
+                            // return res.redirect('/join');
                         }
                     });
             })
         } catch (err) {
             next(err);
         }
-    }
+    },
+    authCheck(req, res, next) {
+        let context = {
+            data: {}
+        }
+        if (req.cookies.userdata !== undefined) {
+            context.data = req.cookies.userdata;
+        } else {
+            return res.redirect('/login');
+        }
+
+        try {
+            getConnection((conn) => {
+                context.conn = conn;
+                userModel.checkUserByCookie(context, context.data)
+                    .then(context => {
+                        context.conn.release();
+                        return context;
+                    })
+                    .then(context => {
+                        if (context.result) {
+                            res.statusCode = 200;
+                            return next();
+                        } else {
+                            res.statusCode = 403;
+                            return res.redirect('/login');
+                        }
+                    });
+            });
+        } catch (err) {
+            next(err);
+        }
+    },
+
+    defaultFunc(req, res, next) {
+        let context = {
+            data: {}
+        }
+
+        try {
+            getConnection((conn) => {
+                context.conn = conn;
+            });
+        } catch (err) {
+            next(err);
+        }
+    },
 }
 
 module.exports = controller;

@@ -13,7 +13,7 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="./css/index_styles.css" rel="stylesheet" />
+        <link href="../css/index_styles.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="./js/scripts.js"></script>
@@ -24,10 +24,10 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Selling Note</div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/test">대시보드</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">상품 데이터 확인</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">상품관리</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">설정</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" id="" href="/test">대시보드</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" id="" href="#!">상품 데이터 확인</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" id="product" href="/product">상품관리</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" id="" href="#!">설정</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -39,10 +39,10 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                                <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="/index">홈으로</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= data.userdata.username %> 님</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="#!">Action</a>
                                         <a class="dropdown-item" href="#!">Another action</a>
@@ -56,7 +56,15 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid", id="field">
-                    html
+                <% if(typeof data !== "undefined") { %>
+                    <% if(data.page === "product"){ %>
+                        <h1>상품관리</h1>
+                        <%-include('product.ejs')%>
+                    <% } %>
+                    <% if(data.page === "setting"){ %>
+                        <%-include('setting.ejs')%>
+                    <% } %>
+                <% } %>
                 </div>
             </div>
         </div>

@@ -1,14 +1,44 @@
 const model = {
-    getItemList (context, {data}) {
-
-    },
-    addItem (context, {user_id, item_no, item_name, market, keyword, notification, notification_set, etc}) {
+    getItemList (context, {user_id}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
-                    INSERT IGNORE INTO ITEMS 
-                    (user_id, item_no, item_name, market, keyword, notification, notification_set, etc) VALUES 
-                    (?, ?, ?, ?, ?, ?, ?, ?)`;
-            let queryValue = [user_id, item_no, item_name, market, keyword, notification, notification_set, etc];
+                    SELECT product_no, product_name, market, keyword, etc
+                    FROM product
+                    WHERE user_id = ?`;
+            let queryValue = [user_id];
+
+            context.conn.query(queryString, queryValue, (err, rows, fields) => {
+                if (err) {
+                    const error = new Error(err);
+                    error.status = 500;
+                    return rejected({ context, error });
+                }
+
+                context.result = [];
+
+                if (rows.length > 0) {
+                    rows.forEach(row => {
+                        context.result.push({
+                            product_no: row.product_no,
+                            product_name: row.product_name,
+                            market: row.market,
+                            keyword: row.keyword,
+                            etc: row.etc || ""
+                        })
+                    })
+                }
+
+                return resolved(context);
+            });
+        })
+    },
+    addItem (context, {user_id, product_no, product_name, market, keyword, etc}) {
+        return new Promise((resolved, rejected) => {
+            let queryString = `
+                    INSERT IGNORE INTO product 
+                    (user_id, product_no, product_name, market, keyword, etc) VALUES 
+                    (?, ?, ?, ?, ?, ?)`;
+            let queryValue = [user_id, product_no, product_name, market, keyword, etc];
 
             context.conn.query(queryString, queryValue, (err, row, fields) => {
                 if (err) {

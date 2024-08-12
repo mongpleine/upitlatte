@@ -1,7 +1,7 @@
 const user = require('./userController');
 const item = require('./itemController');
 const crawl = require('./webCrawlController');
-const naverApi = require('./naverApiController');
+const naverApi = require('./shopDataController');
 
 const api = {
     user: user,

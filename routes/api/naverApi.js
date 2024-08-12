@@ -6,7 +6,11 @@ const api = require('../../controllers')
 module.exports = function () {
 
     router.get('/naver/shoppingdata',
-        api.naverApi.getShoppingData
+        api.naverApi.getProductDataFromNaver
+    )
+
+    router.get('/naver/productLank',
+        api.naverApi.getProductLankByUser
     )
 
     return router;
