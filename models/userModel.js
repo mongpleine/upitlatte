@@ -1,12 +1,12 @@
 
 const model = {
-    checkUser (context, {id, password}) {
+    checkUser (context, {email, password}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
-                    SELECT user_id, username, eid, email, tel FROM USERS
-                    WHERE username = ?
+                    SELECT user_id, username, eid, email, tel FROM users
+                    WHERE email = ?
                     AND password = ?`;
-            let queryValue = [id, password];
+            let queryValue = [email, password];
 
             context.conn.query(queryString, queryValue, (err, rows, fields) => {
                 if (err) {
@@ -31,7 +31,7 @@ const model = {
     checkUserByCookie (context, {user_id, username, email, eid, tel}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
-                    SELECT user_id, username, eid, email, tel FROM USERS
+                    SELECT user_id, username, eid, email, tel FROM users
                     WHERE user_id = ?
                     AND username = ?
                       AND eid = ?
@@ -59,12 +59,12 @@ const model = {
         })
     },
 
-    joinUser (context, {id, password, email, eid}) {
+    joinUser (context, {name, password, email, tel, eid}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
-                    INSERT IGNORE INTO USERS (username, email, password, eid) VALUES 
-                    (?, ?, ?, ?)`;
-            let queryValue = [id, email, password, eid];
+                    INSERT IGNORE INTO users (username, email, password, tel, eid) VALUES 
+                    (?, ?, ?, ?, ?)`;
+            let queryValue = [name, email, password, tel, eid];
 
             context.conn.query(queryString, queryValue, (err, row, fields) => {
                 if (err) {
@@ -83,7 +83,7 @@ const model = {
     getUserTel (context, {user_id}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
-                    SELECT tel FROM USERS
+                    SELECT tel FROM users
                     WHERE user_id = ?`;
             let queryValue = [user_id];
 

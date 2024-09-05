@@ -23,7 +23,8 @@ router.get('/', function(req, res, next) {
 router.get('/index',
   api.user.authCheck,
   (req, res) => {
-    res.render('index.ejs', {data: {userdata: req.cookies.userdata}});
+    res.redirect('/product');
+    // res.render('index.ejs', {data: {userdata: req.cookies.userdata}});
 })
 
 router.get('/product',
@@ -32,15 +33,19 @@ router.get('/product',
 )
 
 router.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/auth/login.html'));
+  res.sendFile(path.join(__dirname, '../public/template/mypage/login.html'));
 })
 
 router.get('/join', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/auth/join.html'));
+  res.sendFile(path.join(__dirname, '../public/template/mypage/register.html'));
 })
 
 router.get('/logout', (req, res, next) => {
   res.clearCookie('userdata').redirect('/login')
+})
+
+router.get('/temp', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/template/mypage/temp.ejs'));
 })
 
 module.exports = router;

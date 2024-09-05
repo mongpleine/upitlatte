@@ -4,7 +4,7 @@ const model = {
             let queryString = `
                     SELECT product_no, product_name, market, keyword, etc
                     FROM product
-                    WHERE user_id = ?`;
+                    WHERE user_id = ? ORDER BY product_id ASC`;
             let queryValue = [user_id];
 
             context.conn.query(queryString, queryValue, (err, rows, fields) => {
@@ -15,6 +15,7 @@ const model = {
                 }
 
                 context.result = [];
+                context.product_list = [];
 
                 if (rows.length > 0) {
                     rows.forEach(row => {
@@ -24,7 +25,8 @@ const model = {
                             market: row.market,
                             keyword: row.keyword,
                             etc: row.etc || ""
-                        })
+                        });
+                        context.product_list.push(row.product_no);
                     })
                 }
 

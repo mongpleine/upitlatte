@@ -1,6 +1,8 @@
 const itemModel = require("../models/itemModel");
 const userModel = require("../models/userModel");
+const shopDataModel = require("../models/shopDataModel");
 const getConnection = require("../models/database/connectionPool");
+const moment = require("moment");
 
 const controller = {
     getItemList(req, res, next) {
@@ -15,11 +17,16 @@ const controller = {
                 context.conn = conn;
                 itemModel.getItemList(context, context.data)
                     .then(context => {
+                        let startDate = moment(new Date()).subtract(6, 'days').format('YYYY-MM-DD');
+                        let endDate = moment(new Date()).format('YYYY-MM-DD');
+                        return shopDataModel.getProductLank(context, {startDate: startDate, endDate: endDate});
+                    })
+                    .then(context => {
                         context.conn.release();
                         return context;
                     })
                     .then(context => {
-                        return res.render('index.ejs', {
+                        return res.render('tables.ejs', {
                             data: {
                                 page: "product",
                                 products: context.result,

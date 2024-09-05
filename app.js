@@ -14,7 +14,7 @@ var app = express();
 // app.set('view engine', 'pug');
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, "/views/ejs"));
+app.set('views', path.join(__dirname, "/public/template/mypage"));
 app.engine('html', require('ejs').renderFile);
 
 app.get('/test', (req, res) => {

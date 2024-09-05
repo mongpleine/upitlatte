@@ -31,7 +31,7 @@ const controller = {
         try {
             getConnection((conn) => {
                 context.conn = conn;
-                shopDataModel.getKeywordList(context, context.data)
+                shopDataModel.getKeywordList(context, {market: "naver"})
                     .then(async context => {
                         context.shopDataList = await apiUtils.getNaverShopData(context.keyword_list);
                         return context;
@@ -41,7 +41,7 @@ const controller = {
                     })
                     .then(context => {
                         context.conn.release();
-                        res.json({message: "success"})
+                        return res.json({message: "success"})
                     })
             })
         } catch (err) {
@@ -63,12 +63,46 @@ const controller = {
                 context.conn = conn;
                 shopDataModel.getKeywordListByUser(context, context.data)
                     .then(context => {
-                        shopDataModel.getShopDataByKeyword(context, context.keyword_list);
-                        return context;
+                        return shopDataModel.getShopDataByKeyword(context, {keyword_list: context.keyword_list, product_no: context.data.product_no});
                     })
                     .then(context => {
                         context.conn.release();
-                        res.json({message: "success"})
+                        return res.json({data: context.shopData})
+                    });
+            });
+        } catch (err) {
+            next(err);
+        }
+    },
+
+    getAllProductLank (req, res, next) {
+        let context = {
+            data: {}
+        }
+
+        try {
+            getConnection((conn) => {
+                context.conn = conn;
+                shopDataModel.getAllProductKeyword(context)
+                    .then(async context => {
+                        context.lankData = [];
+                        for (const result of context.result) {
+                            let temp = await shopDataModel.getShopDataByKeyword(context, {
+                                keyword_list: result.keyword,
+                                product_id: result.product_id,
+                                product_no: result.product_no
+                            });
+                            context.lankData = [...context.lankData, ...temp.shopDataList];
+                            result.shopData = temp.shopData;
+                        }
+                        return context;
+                    })
+                    .then(context => {
+                        return shopDataModel.addProductLank(context);
+                    })
+                    .then(context => {
+                        context.conn.release();
+                        return res.json({data: context.shopData})
                     });
             });
         } catch (err) {

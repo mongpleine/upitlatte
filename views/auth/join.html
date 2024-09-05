@@ -7,27 +7,32 @@
 </head>
 <body>
 <selection class="login-form">
+    <h1>UPIT</h1>
     <h1>SELLING NOTE</h1>
     <form action="/api/user/join" method="post">
         <div class="int-area">
-            <input type="text" name="id" id="id" autocomplete="off" required>
-            <label for="id">USER NAME</label>
+            <input type="email" name="email" id="email" autocomplete="off" required pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*">
+            <label for="email">이메일</label>
         </div>
         <div class="int-area">
             <input type="password" name="pw" id="pw" autocomplete="off" required>
-            <label for="id">PASSWORD</label>
+            <label for="pw">비밀번호</label>
         </div>
         <div class="int-area">
             <input type="password" name="pwc" id="pwc" autocomplete="off" required>
-            <label for="id">PASSWORD CHECK</label>
+            <label for="pwc">비밀번호 확인</label>
         </div>
         <div class="int-area">
-            <input type="email" name="email" id="email" autocomplete="off" required pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*">
-            <label for="id">E-MAIL</label>
+            <input type="text" name="name" id="name" autocomplete="off" required pattern="^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}">
+            <label for="name">성명</label>
+        </div>
+        <div class="int-area">
+            <input type="text" name="tel" id="tel" autocomplete="off" required pattern="(010)\d{8}">
+            <label for="tel">휴대전화</label>
         </div>
         <div class="int-area">
             <input type="" name="eid" id="eid" autocomplete="off" required>
-            <label for="id">사업자번호</label>
+            <label for="eid">사업자번호</label>
         </div>
         <div class="btn-area">
             <button type="submit">JOIN</button>

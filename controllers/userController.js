@@ -1,12 +1,13 @@
 const db = require("../models/database/mysqlSetting").connection;
 const userModel = require("../models/userModel");
+const apiUtils = require("../utils/apiUtils");
 const getConnection = require("../models/database/connectionPool");
 
 const controller = {
     login(req, res, next) {
         let context = {
             data: {
-                id: req.body.id,
+                email: req.body.email,
                 password: req.body.pw
             }
         }
@@ -35,9 +36,10 @@ const controller = {
     join(req, res, next) {
         let context = {
             data: {
-                id: req.body.id,
-                password: req.body.pw,
                 email: req.body.email,
+                password: req.body.pw,
+                name: req.body.name,
+                tel: req.body.tel,
                 eid: req.body.eid
             }
         }
@@ -45,7 +47,18 @@ const controller = {
         try {
             getConnection((conn) => {
                 context.conn = conn;
-                userModel.joinUser(context, context.data)
+                apiUtils.checkEIDFromOdcloud(context)
+                    .then(context => {
+                        if(!context.eidMatch) {
+                            context.errorType = "eid";
+                            context.result = 403;
+                            context.resSend = "<script>alert('유효하지 않은 사업자번호 입니다.'); history.back();</script>";
+                            return context;
+                            // return res.send("<script>alert('유효하지 않은 사업자번호 입니다.'); history.back();</script>");
+                        } else {
+                            return userModel.joinUser(context, context.data)
+                        }
+                    })
                     .then(context => {
                         context.conn.release();
                         return context;
@@ -56,7 +69,16 @@ const controller = {
                             return res.redirect('/login');
                         } else {
                             res.statusCode = 403;
-                            return res.send("<script>history.back(); alert('이미 가입한 메일주소 입니다.');</script>");
+                            let resSend = "resSend" in context ? context.resSend :
+                                "<script>alert('이미 가입한 메일주소 입니다.'); history.back();</script>"
+                            // switch (context.errorType) {
+                            //     case "eid":
+                            //         resSend = "<script>alert('유효하지 않은 사업자번호 입니다.'); history.back();</script>";
+                            //         break;
+                            //
+                            // }
+                            // return res.send("<script>alert('이미 가입한 메일주소 입니다.'); history.back();</script>");
+                            return res.send(resSend);
                             // return res.redirect('/join');
                         }
                     });

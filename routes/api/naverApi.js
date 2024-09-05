@@ -13,5 +13,9 @@ module.exports = function () {
         api.naverApi.getProductLankByUser
     )
 
+    router.get('/naver/allProductLank',
+        api.naverApi.getAllProductLank
+    )
+
     return router;
 }
