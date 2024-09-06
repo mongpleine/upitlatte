@@ -1,0 +1,21 @@
+.accordion-class {
+    display: none;
+    transition: height 1s 0.5s ease-in-out;
+}
+
+.accordion-class.active {
+    display: table-row;
+    transition: height 1s ease-in-out;
+}
+
+textarea {
+    font-size: 13px;
+}
+
+input {
+    font-size: 13px;
+}
+
+select {
+    font-size: 13px;
+}

@@ -3,7 +3,7 @@ const getConnection = require("../models/database/connectionPool");
 const shopDataModel = require("../models/shopDataModel");
 const apiUtils = require("../utils/apiUtils");
 const axios = require('axios');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const http = require("https");
 
 const controller = {
@@ -50,7 +50,7 @@ const controller = {
         }
     },
 
-    getProductLankByUser (req, res, next) {
+    getProductRankByUser (req, res, next) {
         let context = {
             data: {
                 user_id: req.query.user,
@@ -75,7 +75,7 @@ const controller = {
         }
     },
 
-    getAllProductLank (req, res, next) {
+    getAllProductRank (req, res, next) {
         let context = {
             data: {}
         }
@@ -85,20 +85,20 @@ const controller = {
                 context.conn = conn;
                 shopDataModel.getAllProductKeyword(context)
                     .then(async context => {
-                        context.lankData = [];
+                        context.rankData = [];
                         for (const result of context.result) {
                             let temp = await shopDataModel.getShopDataByKeyword(context, {
                                 keyword_list: result.keyword,
                                 product_id: result.product_id,
                                 product_no: result.product_no
                             });
-                            context.lankData = [...context.lankData, ...temp.shopDataList];
+                            context.rankData = [...context.rankData, ...temp.shopDataList];
                             result.shopData = temp.shopData;
                         }
                         return context;
                     })
                     .then(context => {
-                        return shopDataModel.addProductLank(context);
+                        return shopDataModel.addProductRank(context);
                     })
                     .then(context => {
                         context.conn.release();
