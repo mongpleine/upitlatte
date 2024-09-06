@@ -4,8 +4,8 @@ module.exports = {
   database: {
     host: "49.247.14.47",
     port: "3306",
-    user: "sellingnote",
-    password: "upitlatte",
+    user: "root",
+    password: "upitlatteshot",
     database: "sellingnote",
     connectionLimit: 50,
     waitForConnections: false,

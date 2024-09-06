@@ -9,12 +9,12 @@ module.exports = function () {
         api.naverApi.getProductDataFromNaver
     )
 
-    router.get('/naver/productLank',
-        api.naverApi.getProductLankByUser
+    router.get('/naver/productRank',
+        api.naverApi.getProductRankByUser
     )
 
-    router.get('/naver/allProductLank',
-        api.naverApi.getAllProductLank
+    router.get('/naver/allProductRank',
+        api.naverApi.getAllProductRank
     )
 
     return router;

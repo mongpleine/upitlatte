@@ -103,15 +103,15 @@
                                     <tr>
                                         <th width="150">키워드</td>
                                         <% for (var i=0; i<7; i++) { %>
-                                            <th><%= product.lankData[0][i].lank_date %></th>
+                                            <th><%= product.rankData[0][i].rank_date %></th>
                                         <% } %>
                                         <th>상세 팝업</td>
                                     </tr>
-                                    <% product.lankData.forEach( lankData => { %>
+                                    <% product.rankData.forEach( rankData => { %>
                                         <tr>
-                                            <td><%= lankData[0].keyword %></td>
-                                                <% lankData.forEach( data => { %>
-                                                    <td><%= data.lank %></td>
+                                            <td><%= rankData[0].keyword %></td>
+                                                <% rankData.forEach( data => { %>
+                                                    <td><%= data.rank %></td>
                                                 <% }) %>
                                             <td>none</td>
                                         </tr>

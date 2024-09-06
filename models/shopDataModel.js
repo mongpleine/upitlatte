@@ -73,10 +73,10 @@ const model = {
         });
     },
 
-    addProductLank (context) {
+    addProductRank (context) {
         return new Promise((resolved, rejected) => {
-            let queryString = `INSERT IGNORE INTO product_lank (pl_product_id, pl_product_no, keyword, lank, lank_date) VALUES ?`;
-            let queryValue = [context.lankData];
+            let queryString = `INSERT IGNORE INTO product_rank (pl_product_id, pl_product_no, keyword, ranking as rank, rank_date) VALUES ?`;
+            let queryValue = [context.rankData];
 
             context.conn.query(queryString, queryValue, (err, rows, fields) => {
                 if (err) {
@@ -135,7 +135,7 @@ const model = {
 
                 rows.forEach(row => {
                     let data = JSON.parse(row.shop_data);
-                    let lank = data.findIndex((element, index, array) => {
+                    let rank = data.findIndex((element, index, array) => {
                         return element.productId === product_no;
                     })
                     shopData.push({
@@ -144,10 +144,10 @@ const model = {
                         date: today,
                         keyword: row.keyword,
                         // shop_data: JSON.parse(row.shop_data),
-                        lank: lank>=0 ? lank+1 : '100'
+                        rank: rank>=0 ? rank+1 : '100'
                     });
 
-                    shopDataList.push([product_id, product_no, row.keyword, lank>=0 ? lank+1 : '100', today]);
+                    shopDataList.push([product_id, product_no, row.keyword, rank>=0 ? rank+1 : '100', today]);
                 });
 
                 context.shopData = shopData;
@@ -178,12 +178,12 @@ const model = {
         });
     },
 
-    getProductLank (context, {startDate, endDate}) {
+    getProductRank (context, {startDate, endDate}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
-                    SELECT pl_product_id, pl_product_no as product_no, keyword, lank, date_format(lank_date, '%Y-%m-%d') as lank_date
-                    FROM product_lank
-                    WHERE lank_date >= ? AND lank_date <= ? AND pl_product_no in ? ORDER BY keyword, pl_product_id, lank_date ASC`;
+                    SELECT pl_product_id, pl_product_no as product_no, keyword, ranking as rank, date_format(rank_date, '%Y-%m-%d') as rank_date
+                    FROM product_rank
+                    WHERE rank_date >= ? AND rank_date <= ? AND pl_product_no in ? ORDER BY keyword, pl_product_id, rank_date ASC`;
             let queryValue = [startDate, endDate, [context.product_list]];
 
             context.conn.query(queryString, queryValue, (err, rows, fields) => {
@@ -193,37 +193,37 @@ const model = {
                     return rejected({ context, error });
                 }
 
-                context.lankData = [];
+                context.rankData = [];
 
                 rows.forEach(row => {
-                    context.lankData.push({
+                    context.rankData.push({
                         product_id: row.pl_product_id,
                         product_no: row.product_no,
                         keyword: row.keyword,
-                        lank: row.lank,
-                        lank_date: row.lank_date
+                        rank: row.rank,
+                        rank_date: row.rank_date
                     })
                 })
 
                 // 예외처리 필요
                 context.result.forEach(result => {
-                    let lankData = context.lankData.filter(data => {
+                    let rankData = context.rankData.filter(data => {
                         return data.product_no === result.product_no;
                     })
                     result.startDate = startDate;
                     result.endDate = endDate;
                     result.keyword_list = result.keyword.split('/');
-                    result.lankData = [];
+                    result.rankData = [];
                     result.date = [];
                     result.keyword_list.forEach(keyword => {
-                        let tempData = lankData.filter(data => {
+                        let tempData = rankData.filter(data => {
                             return data.keyword === keyword;
                         })
                         let tempList = [];
                         for (let i=0; i<7; i++) {
                             let day = moment(startDate).add(i, 'days').format('YYYY-MM-DD');
                             result.date.push(day);
-                            if (tempData.length > 0 && day === tempData[0].lank_date) {
+                            if (tempData.length > 0 && day === tempData[0].rank_date) {
                                 tempList.push(tempData[0]);
                                 tempData.shift();
                             }
@@ -232,8 +232,8 @@ const model = {
                                     "product_id": tempData[0].product_id,
                                     "product_no": tempData[0].product_no,
                                     "keyword": tempData[0].keyword,
-                                    "lank": "-",
-                                    "lank_date": day
+                                    "rank": "-",
+                                    "rank_date": day
                                 })
                             }
                             else {
@@ -241,14 +241,14 @@ const model = {
                                     "product_id": "-",
                                     "product_no": "-",
                                     "keyword": "-",
-                                    "lank": "-",
-                                    "lank_date": day
+                                    "rank": "-",
+                                    "rank_date": day
                                 })
                             }
                         }
-                        result.lankData.push(tempList)
+                        result.rankData.push(tempList)
                     })
-                    // result.lankData = lankData;
+                    // result.rankData = rankData;
                 })
 
                 return resolved(context);

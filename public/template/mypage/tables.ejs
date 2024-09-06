@@ -429,7 +429,7 @@
                                         <tr class="content-container">
                                         <form action="/api/item/modify" method="POST">
                                             <td class="product_no_field" style="font-size:13px; vertical-align: middle;"><%= product.product_no %>
-<!--                                                 <input type="text" readonly="readonly" name="product_no" id="product_no" size="20" style="width:100%; border: 0;" autocomplete="off" placeholder="제품번호" value="<%= product.product_no %>" required> -->
+                                                 <input type="hidden" readonly="readonly" name="product_no" id="product_no" size="20" style="width:100%; border: 0;" autocomplete="off" placeholder="제품번호" value="<%= product.product_no %>" required>
                                             </td>
                                             <td><textarea valign="middle" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="product_name" id="product_name" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.product_name %></textarea></td>
                                             <td><select id="market" name="market" style="width:100%; border:none; border-radius:0; background:url(../) no-repeat 80% 50%;">
@@ -448,15 +448,15 @@
                                                         <tr>
                                                             <th width="150">키워드</td>
                                                             <% for (var i=0; i<7; i++) { %>
-                                                                <th><%= product.lankData[0][i].lank_date %></th>
+                                                                <th><%= product.rankData[0][i].rank_date %></th>
                                                             <% } %>
                                                             <th>상세 팝업</td>
                                                         </tr>
-                                                        <% product.lankData.forEach( lankData => { %>
+                                                        <% product.rankData.forEach( rankData => { %>
                                                             <tr>
-                                                                <td><%= lankData[0].keyword %></td>
-                                                                    <% lankData.forEach( data => { %>
-                                                                        <td><%= data.lank %></td>
+                                                                <td><%= rankData[0].keyword %></td>
+                                                                    <% rankData.forEach( data => { %>
+                                                                        <td><%= data.rank %></td>
                                                                     <% }) %>
                                                                 <td>none</td>
                                                             </tr>

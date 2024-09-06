@@ -2,7 +2,7 @@ const getConnection = require("../models/database/connectionPool");
 const shopDataModel = require("../models/shopDataModel");
 
 const productUtils = {
-    analysisLanking (context) {
+    analysisRanking (context) {
         try {
             getConnection((conn) => {
                 context.conn = conn;

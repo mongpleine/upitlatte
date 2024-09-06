@@ -54,6 +54,30 @@ const model = {
                 return resolved(context);
             });
         })
+    },
+
+    modifyItem (context, {user_id, product_no, product_name, market, keyword, etc}) {
+        return new Promise((resolved, rejected) => {
+            let queryString = `
+                    UPDATE product SET 
+                    product_name=?, market=?, keyword=?, etc=?
+                    WHERE product_no=? AND user_id = ?`
+            let queryValue = [product_name, market, keyword, etc, product_no, user_id];
+
+            console.log(context.conn.query(queryString, queryValue).sql);
+            context.conn.query(queryString, queryValue, (err, row, fields) => {
+                if (err) {
+                    console.error(err);
+                    const error = new Error(err);
+                    error.status = 500;
+                    return rejected({ context, error });
+                }
+                if (row.affectedRows > 0) context.result = 200;
+                else context.result = 400
+
+                return resolved(context);
+            });
+        })
     }
 }
 
