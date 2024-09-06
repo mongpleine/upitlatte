@@ -59,15 +59,15 @@ create index shop_data_keyword_index
     on shop_data (keyword);
 
 -- auto-generated definition
-create table sellingnote.product_lank
+create table sellingnote.product_rank
 (
     log_id        int auto_increment
         primary key,
     pl_product_id int         not null,
     pl_product_no varchar(20) not null,
     keyword       varchar(50) not null,
-    lank          int         not null,
-    lank_date     date        not null,
-    constraint product_lank_uq
-        unique (pl_product_id, pl_product_no, keyword, lank_date)
+    rank          int         not null,
+    rank_date     date        not null,
+    constraint product_rank_uq
+        unique (pl_product_id, pl_product_no, keyword, rank_date)
 );

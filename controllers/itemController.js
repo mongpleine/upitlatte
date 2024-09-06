@@ -19,7 +19,7 @@ const controller = {
                     .then(context => {
                         let startDate = moment(new Date()).subtract(6, 'days').format('YYYY-MM-DD');
                         let endDate = moment(new Date()).format('YYYY-MM-DD');
-                        return shopDataModel.getProductLank(context, {startDate: startDate, endDate: endDate});
+                        return shopDataModel.getProductRank(context, {startDate: startDate, endDate: endDate});
                     })
                     .then(context => {
                         context.conn.release();

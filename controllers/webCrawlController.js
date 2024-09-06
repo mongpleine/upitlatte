@@ -48,7 +48,7 @@ const controller = {
     //     }
     // },
 
-    getCoupangLank(req, res, next) {
+    getCoupangRank(req, res, next) {
         let context = {
             data: {
                 category: req.body.category
