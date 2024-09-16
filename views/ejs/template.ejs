@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<table>
+			<tr>
+				<th width="3%">&nbsp;</th>
+				<th width="10%">제품번호</th>
+				<th width="15%">제품명</th>
+				<th width="15%">마켓</th>
+				<th>키워드</th>
+				<th>메모</th>
+				<th width="3%">&nbsp;</th>
+			</tr>
+			<% data.products.forEach( product => { %>
+				<tr>
+					<td>&nbsp;</td>
+					<td><%= product.product_no %></td>
+					<td class='left'>
+						<%= product.product_name %>
+					</td>
+					<td><%= product.market %></td>
+					<td><%= product.keyword %></td>
+					<td><%= product.etc %></td>
+					<td>&nbsp;</td>
+				</tr>
+			<% }) %>
+
+			</table>
+</html>

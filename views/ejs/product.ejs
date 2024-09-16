@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+<script type="text/javascript">
+    document.getElementById('product').style.backgroundColor = "beige"
+    function handleResizeHeight(textarea) {
+        textarea.style.height = 'auto'; //height 초기화
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
+</script>
+</head>
+<body>
+    <div style="overflow-x: auto;">
+        <table width="1200">
+            <thead>
+            <tr>
+                <th width="130">제품번호</th>
+                <th width="250">제품명</th>
+                <th width="120">마켓</th>
+                <th width="350">키워드</th>
+                <th width="350" colspan="2">메모</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form action="/api/item/add" method="POST">
+                        <td><input type="text" name="product_no" id="product_no" size="20" style="width:100%; border: 1;" autocomplete="off" placeholder="제품번호" required></td>
+                        <td><input type="text" name="product_name" id="product_name" size="20" style="width:100%; border: 1;" autocomplete="off" placeholder="제품명" required></td>
+                        <td><select id="market" name="market" style="width:100%; border:none; border-radius:0; background:url(../) no-repeat 80% 50%;">
+                            <option value="coupang">쿠팡</option>
+                            <option value="naver">스마트스토어</option>
+                        </select></td>
+    <!--                     <td><input type="text" name="market" id="market" size="20" style="width:100%; border: 1;" autocomplete="off" required></td> -->
+                        <td><input type="text" name="keyword" id="keyword" size="20" style="width:100%; border: 1;" autocomplete="off" placeholder="키워드 '/'로 구분 ex)매트/바닥/욕실" required></td>
+                        <td><textarea oninput="handleResizeHeight(this)" name="etc" id="etc" rows="1" style="width:100%; border: 1; resize: none; vertical-align: middle;" placeholder="메모"></textarea></td>
+                        <td><button type="submit" size="20" style="width:100%;">추가</button></td>
+                    </form>
+                </tr>
+<!--                 <div> -->
+<!--                     test -->
+<!--                 </div> -->
+            <% data.products.forEach( product => { %>
+                <tr>
+                    <td><%= product.product_no %></td>
+                    <td><%= product.product_name %></td>
+                    <td><%= product.market %></td>
+                    <td><%= product.keyword %></td>
+                    <td colspan="2"><textarea oninput="handleResizeHeight(this)" name="content" rows="<%= product.etc.split(/\r\n|\r|\n/).length %>" style="width:100%; border: 0; resize: none;" readonly="readonly"><%= product.etc %></textarea></td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
