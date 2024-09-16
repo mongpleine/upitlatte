@@ -67,7 +67,7 @@ create table sellingnote.product_rank
     pl_product_id int         not null,
     pl_product_no varchar(20) not null,
     keyword       varchar(50) not null,
-    rank          int         not null,
+    ranking          int         not null,
     rank_date     date        not null,
     constraint product_rank_uq
         unique (pl_product_id, pl_product_no, keyword, rank_date)

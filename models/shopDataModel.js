@@ -75,7 +75,7 @@ const model = {
 
     addProductRank (context) {
         return new Promise((resolved, rejected) => {
-            let queryString = `INSERT IGNORE INTO product_rank (pl_product_id, pl_product_no, keyword, ranking as rank, rank_date) VALUES ?`;
+            let queryString = `INSERT IGNORE INTO product_rank (pl_product_id, pl_product_no, keyword, ranking, rank_date) VALUES ?`;
             let queryValue = [context.rankData];
 
             context.conn.query(queryString, queryValue, (err, rows, fields) => {
