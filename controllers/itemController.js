@@ -17,9 +17,13 @@ const controller = {
                 context.conn = conn;
                 itemModel.getItemList(context, context.data)
                     .then(context => {
-                        let startDate = moment(new Date()).subtract(6, 'days').format('YYYY-MM-DD');
-                        let endDate = moment(new Date()).format('YYYY-MM-DD');
-                        return shopDataModel.getProductRank(context, {startDate: startDate, endDate: endDate});
+                        if (context.product_list.length > 0) {
+                            let startDate = moment(new Date()).subtract(6, 'days').format('YYYY-MM-DD');
+                            let endDate = moment(new Date()).format('YYYY-MM-DD');
+                            return shopDataModel.getProductRank(context, {startDate: startDate, endDate: endDate});
+                        } else {
+                            return context;
+                        }
                     })
                     .then(context => {
                         context.conn.release();
@@ -57,6 +61,60 @@ const controller = {
             getConnection(conn => {
                 context.conn = conn;
                 itemModel.addItem(context, context.data)
+                    .then(context => {
+                        context.conn.release();
+                        return context;
+                    })
+                    .then(context => {
+                        return res.redirect('/product');
+                    })
+            });
+        } catch (err) {
+            next(err);
+        }
+    },
+    modifyItem (req, res, next) {
+        let context = {
+            data: {
+                user_id:req.cookies.userdata.user_id,
+                product_no: req.body.product_no || req.query.product_no,
+                product_name: req.body.product_name,
+                market: req.body.market,
+                keyword: req.body.keyword || "",
+                // notification: req.body.notification || 0,
+                // notification_set: req.body.notification_set || "",
+                etc: req.body.etc || "",
+            }
+        }
+
+        try {
+            getConnection(conn => {
+                context.conn = conn;
+                itemModel.modifyItem(context, context.data)
+                    .then(context => {
+                        context.conn.release();
+                        return context;
+                    })
+                    .then(context => {
+                        return res.redirect('/product');
+                    })
+            });
+        } catch (err) {
+            next(err);
+        }
+    },
+    deleteItem (req, res, next) {
+        let context = {
+            data: {
+                user_id:req.cookies.userdata.user_id,
+                product_no: req.body.product_no || req.query.product_no
+            }
+        }
+
+        try {
+            getConnection(conn => {
+                context.conn = conn;
+                itemModel.deleteItem(context, context.data)
                     .then(context => {
                         context.conn.release();
                         return context;

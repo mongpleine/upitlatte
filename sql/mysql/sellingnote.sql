@@ -24,7 +24,7 @@ create table sellingnote.users
 );
 
 -- auto-generated definition
-create table sellingnote.product
+create table product
 (
     product_id       int auto_increment
         primary key,
@@ -36,6 +36,7 @@ create table sellingnote.product
     notification     tinyint(1) default 0 not null,
     notification_set varchar(200)         null,
     etc              varchar(200)         null,
+    active           tinyint(1) default 1 not null,
     constraint items_unique
         unique (user_id, product_no, market),
     constraint items_users_user_id_fk

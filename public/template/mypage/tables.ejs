@@ -24,14 +24,19 @@
     <!-- Custom styles for this page -->
     <link href="/template/mypage/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script type="text/javascript">
-        document.getElementById('product').style.backgroundColor = "beige"
+//         document.getElementById('product').style.backgroundColor = "beige"
         function handleResizeHeight(textarea) {
             textarea.style.height = 'auto'; //height 초기화
             textarea.style.height = textarea.scrollHeight + 'px';
             console.log("ddd");
+            let temp = document.getElementById("jsonData").value;
+            // let jsonData = document.getElementByID("jsonData");
+            let myJsonData = JSON.parse(temp);
+            console.log(myJsonData);
         }
 
         window.onload = () => {
+            console.log(data);
             console.log("aaa");
           const panelFaqContainer = document.querySelectorAll(".product_name_field"); // NodeList 객체
 
@@ -400,36 +405,46 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <input type="hidden" id="jsonData" value="<%=JSON.stringify(data.products)%>" />
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th width="130">제품번호</th>
-                                            <th width="250">제품명</th>
-                                            <th width="120">마켓</th>
-                                            <th width="350">키워드</th>
-                                            <th width="350" colspan="2">메모</th>
+                                            <th width="120px">제품번호</th>
+                                            <th>제품명</th>
+                                            <th width="115px">마켓</th>
+                                            <th>키워드</th>
+                                            <th colspan="2">메모</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <form action="/api/item/add" method="POST">
                                                 <td><input type="text" name="product_no" id="product_no" size="20" style="width:100%; border: 1;" autocomplete="off" placeholder="제품번호" required></td>
-                                                <td><textarea oninput="handleResizeHeight(this)" rows="1" name="product_no" id="product_no" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="제품명"></textarea></td>
+                                                <td><textarea oninput="handleResizeHeight(this)" rows="1" name="product_name" id="product_name" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="제품명"></textarea></td>
                                                 <td><select id="market" name="market" style="width:100%; border:none; border-radius:0; background:url(../) no-repeat 80% 50%;">
                                                     <option value="coupang">쿠팡</option>
                                                     <option value="naver">네이버</option>
                                                 </select></td>
                                                 <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" rows="1" name="keyword" id="keyword" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="키워드 '/'로 구분 ex)매트/바닥/욕실"></textarea></td>
 <!--                                                 <td><input type="text" name="keyword" id="keyword" size="20" style="width:100%; border: 1;" autocomplete="off" placeholder="키워드 '/'로 구분 ex)매트/바닥/욕실" required></td> -->
-                                                <td><textarea oninput="handleResizeHeight(this)" name="etc" id="etc" rows="1" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="메모"></textarea></td>
-                                                <td><button type="submit" size="20" style="width:100%;">추가</button></td>
+                                                <td width="25%"><textarea oninput="handleResizeHeight(this)" name="etc" id="etc" rows="1" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="메모"></textarea></td>
+                                                <td width="10%">
+<!--                                                    <button type="submit" size="20" style="width:100%;">추가</button>-->
+                                                    <button type="submit" class="btn btn-success btn-icon-split" style="height: 32px;">
+<!--                                                        <span class="icon text-white-50">-->
+<!--                                                            <i class="fas fa-check"></i>-->
+<!--                                                        </span>-->
+                                                        <span class="text" style="font-size: 14px; text-align: center;">추가</span>
+                                                    </button>
+                                                </td>
                                             </form>
                                         </tr>
                                     <% data.products.forEach( product => { %>
                                         <tr class="content-container">
-                                        <form action="/api/item/modify" method="POST">
-                                            <td class="product_no_field" style="font-size:13px; vertical-align: middle;"><%= product.product_no %>
-<!--                                                 <input type="text" readonly="readonly" name="product_no" id="product_no" size="20" style="width:100%; border: 0;" autocomplete="off" placeholder="제품번호" value="<%= product.product_no %>" required> -->
+                                        <form action="/api/item/modify?product_no=<%= product.product_no %>" method="POST">
+                                            <td class="product_no_field" style="font-size:13px; vertical-align: middle;">
+<!--                                                <%= product.product_no %>-->
+                                                 <input type="text" readonly="readonly" name="product_no" id="product_no" size="20" style="color:gray; width:100%; border: 0;" autocomplete="off" placeholder="제품번호" value="<%= product.product_no %>" required>
                                             </td>
                                             <td><textarea valign="middle" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="product_name" id="product_name" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.product_name %></textarea></td>
                                             <td><select id="market" name="market" style="width:100%; border:none; border-radius:0; background:url(../) no-repeat 80% 50%;">
@@ -438,7 +453,21 @@
                                             </select></td>
                                             <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="keyword" id="keyword" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.keyword %></textarea></td>
                                             <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="etc" id="etc" rows="<%= product.etc.split(/\r\n|\r|\n/).length %>" style="width:100%; border: 0; resize: none; vertical-align: middle;"><%= product.etc %></textarea></td>
-                                            <td><button type="submit" size="20" style="width:100%;">수정</button></td>
+                                            <td>
+<!--                                                <button type="submit" size="20" style="width:100%;">수정</button>-->
+                                                <button type="submit" class="btn btn-warning btn-icon-split" style="height: 32px;">
+<!--                                                    <span class="icon text-white-50">-->
+<!--                                                        <i class="fas fa-exclamation-triangle"></i>-->
+<!--                                                    </span>-->
+                                                    <span class="text" style="font-size: 14px; text-align: center;">수정</span>
+                                                </button>
+                                                <a href="/api/item/del?product_no=<%= product.product_no %>" class="btn btn-danger btn-icon-split" style="height: 32px;">
+<!--                                                    <span class="icon text-white-50">-->
+<!--                                                        <i class="fas fa-trash"></i>-->
+<!--                                                    </span>-->
+                                                    <span class="text" style="font-size: 14px; text-align: center;">삭제</span>
+                                                </a>
+                                            </td>
                                         </form>
                                         </tr>
                                         <tr class="accordion-class">
@@ -448,15 +477,15 @@
                                                         <tr>
                                                             <th width="150">키워드</td>
                                                             <% for (var i=0; i<7; i++) { %>
-                                                                <th><%= product.lankData[0][i].lank_date %></th>
+                                                                <th><%= product.rankData[0][i].rank_date %></th>
                                                             <% } %>
                                                             <th>상세 팝업</td>
                                                         </tr>
-                                                        <% product.lankData.forEach( lankData => { %>
+                                                        <% product.rankData.forEach( rankData => { %>
                                                             <tr>
-                                                                <td><%= lankData[0].keyword %></td>
-                                                                    <% lankData.forEach( data => { %>
-                                                                        <td><%= data.lank %></td>
+                                                                <td><%= rankData[0].keyword %></td>
+                                                                    <% rankData.forEach( data => { %>
+                                                                        <td><%= data.rank %></td>
                                                                     <% }) %>
                                                                 <td>none</td>
                                                             </tr>

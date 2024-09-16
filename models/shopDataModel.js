@@ -2,7 +2,7 @@ const moment = require("moment");
 const model = {
     getKeywordList (context, {market}) {
         return new Promise((resolved, rejected) => {
-            let queryString = `SELECT keyword FROM product WHERE market = ?`;
+            let queryString = `SELECT keyword FROM product WHERE market = ? AND active = true`;
             let queryValue = [market];
 
             context.conn.query(queryString, queryValue, (err, rows, fields) => {
@@ -29,7 +29,7 @@ const model = {
 
     getKeywordListByUser (context, {user_id, product_no}) {
         return new Promise((resolved, rejected) => {
-            let queryString = `SELECT keyword FROM product WHERE user_id = ? AND product_no = ?`;
+            let queryString = `SELECT keyword FROM product WHERE user_id = ? AND product_no = ? AND active = true`;
             let queryValue = [user_id, product_no];
 
             context.conn.query(queryString, queryValue, (err, rows, fields) => {
@@ -47,7 +47,7 @@ const model = {
 
     getAllProductKeyword (context) {
         return new Promise((resolved, rejected) => {
-            let queryString = `SELECT product_id, keyword, product_no FROM product WHERE market = ?`;
+            let queryString = `SELECT product_id, keyword, product_no FROM product WHERE market = ? AND active = true`;
             let queryValue = ["naver"];
 
             context.conn.query(queryString, queryValue, (err, rows, fields) => {
@@ -181,7 +181,7 @@ const model = {
     getProductRank (context, {startDate, endDate}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
-                    SELECT pl_product_id, pl_product_no as product_no, keyword, rank, date_format(rank_date, '%Y-%m-%d') as rank_date
+                    SELECT pl_product_id, pl_product_no as product_no, keyword, ranking, date_format(rank_date, '%Y-%m-%d') as rank_date
                     FROM product_rank
                     WHERE rank_date >= ? AND rank_date <= ? AND pl_product_no in ? ORDER BY keyword, pl_product_id, rank_date ASC`;
             let queryValue = [startDate, endDate, [context.product_list]];
@@ -190,6 +190,7 @@ const model = {
                 if (err) {
                     const error = new Error(err);
                     error.status = 500;
+                    console.error(err);
                     return rejected({ context, error });
                 }
 
@@ -200,7 +201,7 @@ const model = {
                         product_id: row.pl_product_id,
                         product_no: row.product_no,
                         keyword: row.keyword,
-                        rank: row.rank,
+                        rank: row.ranking,
                         rank_date: row.rank_date
                     })
                 })
