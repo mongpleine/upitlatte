@@ -86,7 +86,7 @@ const controller = {
                 shopDataModel.getAllProductKeyword(context)
                     .then(async context => {
                         context.rankData = [];
-                        for (const result of context.result) {
+                        for (const result of context.product_list) {
                             let temp = await shopDataModel.getShopDataByKeyword(context, {
                                 keyword_list: result.keyword,
                                 product_id: result.product_id,
