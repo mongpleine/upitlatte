@@ -75,7 +75,8 @@ const model = {
 
     addProductRank (context) {
         return new Promise((resolved, rejected) => {
-            let queryString = `INSERT IGNORE INTO product_rank (pl_product_id, pl_product_no, keyword, ranking, rank_date) VALUES ?`;
+            let queryString = `INSERT IGNORE INTO product_rank (pl_product_id, pl_product_no, keyword, ranking, rank_date) VALUES ?
+                                ON DUPLICATE KEY UPDATE ranking = VALUES(ranking)`;
             let queryValue = [context.rankData];
 
             context.conn.query(queryString, queryValue, (err, rows, fields) => {
@@ -92,7 +93,8 @@ const model = {
 
     addNaverShopData (context, shopDataList) {
         return new Promise((resolved, rejected) => {
-            let queryString = `INSERT IGNORE INTO shop_data (keyword, shop_data, data_date) VALUES ?`;
+            let queryString = `INSERT IGNORE INTO shop_data (keyword, shop_data, data_date) VALUES ?
+                                ON DUPLICATE KEY UPDATE shop_data = VALUES(shop_data)`;
             let queryValue = [shopDataList];
 
             context.conn.query(queryString, queryValue, (err, row, fields) => {
