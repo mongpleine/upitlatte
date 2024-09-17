@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>UPIT SELLING NOTE</title>
 
     <!-- Custom fonts for this template -->
     <link href="/template/mypage/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,7 +28,6 @@
         function handleResizeHeight(textarea) {
             textarea.style.height = 'auto'; //height 초기화
             textarea.style.height = textarea.scrollHeight + 'px';
-            console.log("ddd");
             let temp = document.getElementById("jsonData").value;
             // let jsonData = document.getElementByID("jsonData");
             let myJsonData = JSON.parse(temp);
@@ -36,8 +35,6 @@
         }
 
         window.onload = () => {
-            console.log(data);
-            console.log("aaa");
           const panelFaqContainer = document.querySelectorAll(".product_name_field"); // NodeList 객체
 
           // panel-faq-answer
@@ -309,7 +306,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                        <img class="rounded-circle" src="/template/mypage/img/undraw_profile_1.svg"
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -321,7 +318,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                        <img class="rounded-circle" src="/template/mypage/img/undraw_profile_2.svg"
                                             alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
@@ -333,7 +330,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                        <img class="rounded-circle" src="/template/mypage/img/undraw_profile_3.svg"
                                             alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
@@ -367,7 +364,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="/template/mypage/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -446,12 +443,12 @@
 <!--                                                <%= product.product_no %>-->
                                                  <input type="text" readonly="readonly" name="product_no" id="product_no" size="20" style="color:gray; width:100%; border: 0;" autocomplete="off" placeholder="제품번호" value="<%= product.product_no %>" required>
                                             </td>
-                                            <td><textarea valign="middle" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="product_name" id="product_name" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.product_name %></textarea></td>
+                                            <td><textarea rows="1" valign="middle" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="product_name" id="product_name" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.product_name %></textarea></td>
                                             <td><select id="market" name="market" style="width:100%; border:none; border-radius:0; background:url(../) no-repeat 80% 50%;">
                                                 <option value="coupang" <% if (product.market == 'coupang') { %> selected <% } %>>쿠팡</option>
                                                 <option value="naver" <% if (product.market == 'naver') { %> selected <% } %>>네이버</option>
                                             </select></td>
-                                            <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="keyword" id="keyword" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.keyword %></textarea></td>
+                                            <td><textarea rows="1" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="keyword" id="keyword" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.keyword %></textarea></td>
                                             <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="etc" id="etc" rows="<%= product.etc.split(/\r\n|\r|\n/).length %>" style="width:100%; border: 0; resize: none; vertical-align: middle;"><%= product.etc %></textarea></td>
                                             <td>
 <!--                                                <button type="submit" size="20" style="width:100%;">수정</button>-->
@@ -472,26 +469,37 @@
                                         </tr>
                                         <tr class="accordion-class">
                                             <td colspan="6">
-                                                <div class="row-display" style="display:flex;">
-                                                    <table style="width:100%;">
-                                                        <tr>
-                                                            <th width="150">키워드</td>
-                                                            <% for (var i=0; i<7; i++) { %>
-                                                                <th><%= product.rankData[0][i].rank_date %></th>
-                                                            <% } %>
-                                                            <th>상세 팝업</td>
-                                                        </tr>
-                                                        <% product.rankData.forEach( rankData => { %>
-                                                            <tr>
-                                                                <td><%= rankData[0].keyword %></td>
-                                                                    <% rankData.forEach( data => { %>
-                                                                        <td><%= data.rank %></td>
-                                                                    <% }) %>
-                                                                <td>none</td>
-                                                            </tr>
-                                                        <% }) %>
-                                                    </table>
+                                                <div class="card shadow mb-4">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="chart-area">
+                                                            <canvas id="myAreaChart"></canvas>
+                                                        </div>
+<!--                                                        <hr>-->
+<!--                                                        Styling for the area chart can be found in the-->
+<!--                                                        <code>/js/chart/chart-area.js</code> file.-->
+                                                    </div>
                                                 </div>
+<!--                                                <div class="row-display" style="display:flex;">-->
+<!--                                                    <table style="width:100%;">-->
+<!--                                                        <tr>-->
+<!--                                                            <th width="150">키워드</td>-->
+<!--                                                            <% for (var i=0; i<7; i++) { %>-->
+<!--                                                                <th><%= product.rankData[0][i].rank_date %></th>-->
+<!--                                                            <% } %>-->
+<!--                                                        </tr>-->
+<!--                                                        <% product.rankData.forEach( rankData => { %>-->
+<!--                                                            <tr>-->
+<!--                                                                <td><%= rankData[0].keyword %></td>-->
+<!--                                                                    <% rankData.forEach( data => { %>-->
+<!--                                                                        <td><%= data.rank %></td>-->
+<!--                                                                    <% }) %>-->
+<!--                                                            </tr>-->
+<!--                                                        <% }) %>-->
+<!--                                                    </table>-->
+<!--                                                </div>-->
                                             </td>
                                         </tr>
                                     <% }) %>
@@ -562,8 +570,12 @@
 <!--     <script src="/template/mypage/vendor/datatables/jquery.dataTables.min.js"></script> -->
 <!--     <script src="/template/mypage/vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
 
+    <!-- Page level plugins -->
+    <script src="/template/mypage/vendor/chart.js/Chart.min.js"></script>
+
     <!-- Page level custom scripts -->
     <script src="/template/mypage/js/demo/datatables-demo.js"></script>
+    <script src="/template/mypage/js/chart/chart-area.js"></script>
 
 </body>
 
