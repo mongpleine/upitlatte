@@ -55,9 +55,24 @@
             });
           };
         }
+
+        function modifyProduct(product_no) {
+            let submit_name = `modify_${product_no}`;
+            if(confirm("제품 정보를 수정합니다.") === true) {
+                document[submit_name].submit();
+            }
+            else {
+                return false;
+            }
+        }
+
         function delProduct(product_no) {
-            alert("추가 되었습니다. ");
-            console.log(product_no);
+            if(confirm("제품 정보를 삭제할까요?") === true) {
+                location.href = `/api/item/del?product_no=${product_no}`;
+            }
+            else {
+                return false;
+            }
         }
     </script>
 
@@ -443,7 +458,7 @@
                                         </tr>
                                     <% data.products.forEach( product => { %>
                                         <tr class="content-container">
-                                        <form action="/api/item/modify?product_no=<%= product.product_no %>" method="POST">
+                                        <form action="/api/item/modify?product_no=<%= product.product_no %>" name="modify_<%= product.product_no %>" method="POST">
                                             <td class="product_no_field" style="font-size:13px; vertical-align: middle;">
 <!--                                                <%= product.product_no %>-->
                                                  <input type="text" readonly="readonly" name="product_no" id="product_no" size="20" style="color:gray; width:100%; border: 0;" autocomplete="off" placeholder="제품번호" value="<%= product.product_no %>" required>
@@ -456,7 +471,8 @@
                                             <td><textarea rows="1" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="keyword" id="keyword" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.keyword %></textarea></td>
                                             <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="etc" id="etc" rows="<%= product.etc.split(/\r\n|\r|\n/).length %>" style="width:100%; border: 0; resize: none; vertical-align: middle;"><%= product.etc %></textarea></td>
                                             <td>
-                                                <button type="submit" class="btn btn-warning btn-icon-split" style="height: 30px; width: 30px;">
+<!--                                                <button type="submit" class="btn btn-warning btn-icon-split" style="height: 30px; width: 30px;">-->
+                                                <button onclick="modifyProduct(<%= product.product_no %>)" class="btn btn-warning btn-icon-split" style="height: 30px; width: 30px;">
                                                     <span class="text" style="display: flex;" title="수정하기">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hammer" viewBox="0 0 16 16">
                                                             <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5 5 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334"/>
