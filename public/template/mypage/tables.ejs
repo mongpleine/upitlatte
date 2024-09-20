@@ -24,56 +24,7 @@
     <!-- Custom styles for this page -->
     <link href="/template/mypage/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script type="text/javascript">
-//         document.getElementById('product').style.backgroundColor = "beige"
-        function handleResizeHeight(textarea) {
-            textarea.style.height = 'auto'; //height 초기화
-            textarea.style.height = textarea.scrollHeight + 'px';
-            let temp = document.getElementById("jsonData").value;
-            // let jsonData = document.getElementByID("jsonData");
-            let myJsonData = JSON.parse(temp);
-            console.log(myJsonData);
-        }
 
-        window.onload = () => {
-          const panelFaqContainer = document.querySelectorAll("#collapse_btn_field"); // NodeList 객체
-
-          // panel-faq-answer
-          let panelFaqAnswer = document.querySelectorAll(".accordion-class");
-
-          let product_no_field = document.querySelectorAll(".product_no_field");
-
-
-          // btn-all-close
-          const btnAllClose = document.querySelector("#btn-all-close");
-
-          // 반복문 순회하면서 해당 제목 클릭시 콜백 처리
-          for( let i=0; i < panelFaqContainer.length; i++ ) {
-            panelFaqContainer[i].addEventListener('click', function() { // 클릭시 처리할 일
-              // FAQ 제목 클릭시 -> 본문이 보이게끔 -> active 클래스 추가
-              panelFaqAnswer[i].classList.toggle('active');
-              console.log("bbb");
-            });
-          };
-        }
-
-        function modifyProduct(product_no) {
-            let submit_name = `modify_${product_no}`;
-            if(confirm("제품 정보를 수정합니다.") === true) {
-                document[submit_name].submit();
-            }
-            else {
-                return false;
-            }
-        }
-
-        function delProduct(product_no) {
-            if(confirm("제품 정보를 삭제할까요?") === true) {
-                location.href = `/api/item/del?product_no=${product_no}`;
-            }
-            else {
-                return false;
-            }
-        }
     </script>
 
 </head>
@@ -112,77 +63,6 @@
                 Interface
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"-->
-<!--                    aria-expanded="true" aria-controls="collapseTwo">-->
-<!--                    <i class="fas fa-fw fa-cog"></i>-->
-<!--                    <span>Components</span>-->
-<!--                </a>-->
-<!--                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">-->
-<!--                    <div class="bg-white py-2 collapse-inner rounded">-->
-<!--                        <h6 class="collapse-header">Custom Components:</h6>-->
-<!--                        <a class="collapse-item" href="buttons.html">Buttons</a>-->
-<!--                        <a class="collapse-item" href="cards.html">Cards</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </li>-->
-
-<!--            &lt;!&ndash; Nav Item - Utilities Collapse Menu &ndash;&gt;-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"-->
-<!--                    aria-expanded="true" aria-controls="collapseUtilities">-->
-<!--                    <i class="fas fa-fw fa-wrench"></i>-->
-<!--                    <span>Utilities</span>-->
-<!--                </a>-->
-<!--                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"-->
-<!--                    data-parent="#accordionSidebar">-->
-<!--                    <div class="bg-white py-2 collapse-inner rounded">-->
-<!--                        <h6 class="collapse-header">Custom Utilities:</h6>-->
-<!--                        <a class="collapse-item" href="utilities-color.html">Colors</a>-->
-<!--                        <a class="collapse-item" href="utilities-border.html">Borders</a>-->
-<!--                        <a class="collapse-item" href="utilities-animation.html">Animations</a>-->
-<!--                        <a class="collapse-item" href="utilities-other.html">Other</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </li>-->
-
-<!--            &lt;!&ndash; Divider &ndash;&gt;-->
-<!--            <hr class="sidebar-divider">-->
-
-<!--            &lt;!&ndash; Heading &ndash;&gt;-->
-<!--            <div class="sidebar-heading">-->
-<!--                Addons-->
-<!--            </div>-->
-
-<!--            &lt;!&ndash; Nav Item - Pages Collapse Menu &ndash;&gt;-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"-->
-<!--                    aria-expanded="true" aria-controls="collapsePages">-->
-<!--                    <i class="fas fa-fw fa-folder"></i>-->
-<!--                    <span>Pages</span>-->
-<!--                </a>-->
-<!--                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">-->
-<!--                    <div class="bg-white py-2 collapse-inner rounded">-->
-<!--                        <h6 class="collapse-header">Login Screens:</h6>-->
-<!--                        <a class="collapse-item" href="login.html">Login</a>-->
-<!--                        <a class="collapse-item" href="register.html">Register</a>-->
-<!--                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>-->
-<!--                        <div class="collapse-divider"></div>-->
-<!--                        <h6 class="collapse-header">Other Pages:</h6>-->
-<!--                        <a class="collapse-item" href="404.html">404 Page</a>-->
-<!--                        <a class="collapse-item" href="blank.html">Blank Page</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </li>-->
-
-<!--            &lt;!&ndash; Nav Item - Charts &ndash;&gt;-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="charts.html">-->
-<!--                    <i class="fas fa-fw fa-chart-area"></i>-->
-<!--                    <span>Charts</span></a>-->
-<!--            </li>-->
-
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
                 <a class="nav-link" href="/product">
@@ -216,20 +96,6 @@
                             <i class="fa fa-bars"></i>
                         </button>
                     </form>
-
-                    <!-- Topbar Search 검색창 -->
-<!--                    <form-->
-<!--                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">-->
-<!--                        <div class="input-group">-->
-<!--                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."-->
-<!--                                aria-label="Search" aria-describedby="basic-addon2">-->
-<!--                            <div class="input-group-append">-->
-<!--                                <button class="btn btn-primary" type="button">-->
-<!--                                    <i class="fas fa-search fa-sm"></i>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </form>-->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -344,18 +210,22 @@
                                     <% data.products.forEach( product => { %>
                                         <tr class="content-container">
                                             <td width="50px">
-                                                <a id="collapse_btn_field" class="btn btn-light btn-icon-split">
+                                                <a id="collapse_btn_field" class="btn btn-light btn-icon-split" onclick="changeTitle(this)">
                                                     <span class="text" style="display: flex; text-align: center; font-size: 12px;" title="차트 보기">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-square" viewBox="0 0 16 16">
+                                                        <svg id="collapse_btn_open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-square" viewBox="0 0 16 16">
                                                             <path d="M3.626 6.832A.5.5 0 0 1 4 6h8a.5.5 0 0 1 .374.832l-4 4.5a.5.5 0 0 1-.748 0z"/>
                                                             <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
                                                         </svg>
+                                                        <svg id="collapse_btn_close" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-square" viewBox="0 0 16 16">
+                                                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                                            <path d="M3.544 10.705A.5.5 0 0 0 4 11h8a.5.5 0 0 0 .374-.832l-4-4.5a.5.5 0 0 0-.748 0l-4 4.5a.5.5 0 0 0-.082.537"/>
+                                                        </svg>
                                                     </span>
+
                                                 </a>
                                             </td>
                                         <form action="/api/item/modify?product_no=<%= product.product_no %>" name="modify_<%= product.product_no %>" method="POST">
                                             <td class="product_no_field" style="font-size:13px; vertical-align: middle;">
-<!--                                                <%= product.product_no %>-->
                                                  <input type="text" readonly="readonly" name="product_no" id="product_no" size="20" style="color:gray; width:100%; border: 0;" autocomplete="off" placeholder="제품번호" value="<%= product.product_no %>" required>
                                             </td>
                                             <td class = "product_name_field"><textarea rows="1" valign="middle" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="product_name" id="product_name" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.product_name %></textarea></td>
@@ -366,7 +236,6 @@
                                             <td><textarea rows="1" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="keyword" id="keyword" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.keyword %></textarea></td>
                                             <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="etc" id="etc" rows="<%= product.etc.split(/\r\n|\r|\n/).length %>" style="width:100%; border: 0; resize: none; vertical-align: middle;"><%= product.etc %></textarea></td>
                                             <td>
-<!--                                                <button type="submit" class="btn btn-warning btn-icon-split" style="height: 30px; width: 30px;">-->
                                                 <button onclick="modifyProduct(<%= product.product_no %>)" class="btn btn-warning btn-icon-split" style="height: 30px; width: 30px;">
                                                     <span class="text" style="display: flex;" title="수정하기">
                                                         <!-- 글자로 -->
@@ -404,29 +273,8 @@
                                                         <div class="chart-area">
                                                             <canvas id="Chart-<%= product.product_no %>"></canvas>
                                                         </div>
-<!--                                                        <hr>-->
-<!--                                                        Styling for the area chart can be found in the-->
-<!--                                                        <code>/js/chart/chart-area.js</code> file.-->
                                                     </div>
                                                 </div>
-<!--                                                <div class="row-display" style="display:flex;">-->
-<!--                                                    <table style="width:100%;">-->
-<!--                                                        <tr>-->
-<!--                                                            <th width="150">키워드</td>-->
-<!--                                                            <% for (var i=0; i<7; i++) { %>-->
-<!--                                                                <th><%= product.rankData[0][i].rank_date %></th>-->
-<!--                                                            <% } %>-->
-<!--                                                        </tr>-->
-<!--                                                        <% product.rankData.forEach( rankData => { %>-->
-<!--                                                            <tr>-->
-<!--                                                                <td><%= rankData[0].keyword %></td>-->
-<!--                                                                    <% rankData.forEach( data => { %>-->
-<!--                                                                        <td><%= data.rank %></td>-->
-<!--                                                                    <% }) %>-->
-<!--                                                            </tr>-->
-<!--                                                        <% }) %>-->
-<!--                                                    </table>-->
-<!--                                                </div>-->
                                             </td>
                                         </tr>
                                     <% }) %>
@@ -494,14 +342,10 @@
     <script src="/template/mypage/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-<!--     <script src="/template/mypage/vendor/datatables/jquery.dataTables.min.js"></script> -->
-<!--     <script src="/template/mypage/vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
-
-    <!-- Page level plugins -->
     <script src="/template/mypage/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-<!--    <script src="/template/mypage/js/demo/datatables-demo.js"></script>-->
+    <script src="/template/mypage/js/product.js"></script>
     <script src="/template/mypage/js/chart/chart-area.js"></script>
 
 </body>
