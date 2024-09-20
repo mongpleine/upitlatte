@@ -86,7 +86,7 @@ jsonData.forEach(data => {
           ticks: {
             reverse: true,
             min: 0,
-            max: 100,
+            max: 300,
             maxTicksLimit: 5,
             padding: 10,
             // Include a dollar sign in the ticks
