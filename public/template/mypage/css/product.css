@@ -1,5 +1,5 @@
 .accordion-class {
-    /*display: none;*/
+    display: none;
     transition: height 1s 0.5s ease-in-out;
 }
 
