@@ -35,7 +35,7 @@
         }
 
         window.onload = () => {
-          const panelFaqContainer = document.querySelectorAll(".product_no_field"); // NodeList 객체
+          const panelFaqContainer = document.querySelectorAll("#collapse_btn_field"); // NodeList 객체
 
           // panel-faq-answer
           let panelFaqAnswer = document.querySelectorAll(".accordion-class");
@@ -217,19 +217,19 @@
                         </button>
                     </form>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <!-- Topbar Search 검색창 -->
+<!--                    <form-->
+<!--                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">-->
+<!--                        <div class="input-group">-->
+<!--                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."-->
+<!--                                aria-label="Search" aria-describedby="basic-addon2">-->
+<!--                            <div class="input-group-append">-->
+<!--                                <button class="btn btn-primary" type="button">-->
+<!--                                    <i class="fas fa-search fa-sm"></i>-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </form>-->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -258,150 +258,33 @@
                             </div>
                         </li>
 
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="/template/mypage/img/undraw_profile_1.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="/template/mypage/img/undraw_profile_2.svg"
-                                            alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="/template/mypage/img/undraw_profile_3.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                            </div>
-                        </li>
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= data.userdata.username %> 님</span>
                                 <img class="img-profile rounded-circle"
                                     src="/template/mypage/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+<!--                                <a class="dropdown-item" href="#">-->
+<!--                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>-->
+<!--                                    Profile-->
+<!--                                </a>-->
+<!--                                <a class="dropdown-item" href="#">-->
+<!--                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>-->
+<!--                                    Settings-->
+<!--                                </a>-->
+<!--                                <a class="dropdown-item" href="#">-->
+<!--                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>-->
+<!--                                    Activity Log-->
+<!--                                </a>-->
+<!--                                <div class="dropdown-divider"></div>-->
+                                <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -425,6 +308,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th width="120px">제품번호</th>
                                             <th>제품명</th>
                                             <th width="115px">마켓</th>
@@ -434,6 +318,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td></td>
                                             <form action="/api/item/add" method="POST">
                                                 <td><input type="text" name="product_no" id="product_no" size="20" style="width:100%; border: 1;" autocomplete="off" placeholder="제품번호" required></td>
                                                 <td><textarea oninput="handleResizeHeight(this)" rows="1" name="product_name" id="product_name" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="제품명"></textarea></td>
@@ -443,8 +328,8 @@
                                                 </select></td>
                                                 <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" rows="1" name="keyword" id="keyword" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="키워드 '/'로 구분 ex)매트/바닥/욕실"></textarea></td>
 <!--                                                 <td><input type="text" name="keyword" id="keyword" size="20" style="width:100%; border: 1;" autocomplete="off" placeholder="키워드 '/'로 구분 ex)매트/바닥/욕실" required></td> -->
-                                                <td width="25%"><textarea oninput="handleResizeHeight(this)" name="etc" id="etc" rows="1" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="메모"></textarea></td>
-                                                <td width="7%">
+                                                <td><textarea oninput="handleResizeHeight(this)" name="etc" id="etc" rows="1" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="메모"></textarea></td>
+                                                <td width="90px">
                                                     <button type="submit" class="btn btn-success btn-icon-split" style="height: 30px; width: 30px;">
                                                         <span class="text" style="display: flex;" title="추가하기">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -458,6 +343,16 @@
                                         </tr>
                                     <% data.products.forEach( product => { %>
                                         <tr class="content-container">
+                                            <td width="50px">
+                                                <a id="collapse_btn_field" class="btn btn-light btn-icon-split">
+                                                    <span class="text" style="display: flex; text-align: center; font-size: 12px;" title="차트 보기">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-square" viewBox="0 0 16 16">
+                                                            <path d="M3.626 6.832A.5.5 0 0 1 4 6h8a.5.5 0 0 1 .374.832l-4 4.5a.5.5 0 0 1-.748 0z"/>
+                                                            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+                                                        </svg>
+                                                    </span>
+                                                </a>
+                                            </td>
                                         <form action="/api/item/modify?product_no=<%= product.product_no %>" name="modify_<%= product.product_no %>" method="POST">
                                             <td class="product_no_field" style="font-size:13px; vertical-align: middle;">
 <!--                                                <%= product.product_no %>-->
@@ -582,7 +477,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
                 </div>
             </div>
         </div>
