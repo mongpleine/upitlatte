@@ -1,7 +1,7 @@
 const mysql = require('mysql');
-const config = require('../../config/credencial');
+const credential = require('../../config/credencial');
 
-let pool = mysql.createPool(config.local_database);
+let pool = mysql.createPool(credential[credential.config.db_selected]);
 
 function getConnection(callback) {
     pool.getConnection(function (err, conn) {

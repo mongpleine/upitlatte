@@ -57,10 +57,12 @@ const model = {
                     return rejected({ context, error });
                 }
 
-                context.result = [];
+                context.product_list = [];
+                context.keyword_list = [];
                 if (rows.length > 0) {
                     rows.forEach(row => {
-                        context.result.push({
+                        context.keyword_list.push(...row.keyword.split('/'));
+                        context.product_list.push({
                             product_id: row.product_id,
                             product_no: row.product_no,
                             keyword: row.keyword.split('/')

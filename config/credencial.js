@@ -1,6 +1,10 @@
 module.exports = {
   app_id: "2Qmg3rpsQWMCUKNsRHg253",
   app_secret: "$2a$04$ryStHSrEKdImVI7/8eO.UO",
+  config: {
+    db_selected: "database",
+    rank_limit: 300,
+  },
   database: {
     host: "49.247.14.47",
     port: "3306",

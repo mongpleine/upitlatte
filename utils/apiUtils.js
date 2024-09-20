@@ -5,7 +5,7 @@ const apiUtils = {
     async getNaverShopData (keywordList) {
         const client_id = "dQL9g9JZCVfWsHNACgOq";
         const client_secret = "hbsA4OfuuL";
-        const api_url = "https://openapi.naver.com/v1/search/shop.json?display=100&start=1&query=";
+        const api_url = `https://openapi.naver.com/v1/search/shop.json?display=${config.rank_limit}&start=1&query=`;
         let shopDataList = [];
         let today = moment(new Date()).format('YYYY-MM-DD');
         for (const keyword of keywordList) {

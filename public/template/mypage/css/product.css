@@ -1,10 +1,30 @@
 .accordion-class {
-    /*display: none;*/
+    display: none;
     transition: height 1s 0.5s ease-in-out;
 }
 
 .accordion-class.active {
     display: table-row;
+    transition: height 1s ease-in-out;
+}
+
+#collapse_btn_open {
+    display: flex;
+    transition: height 1s 0.5s ease-in-out;
+}
+
+#collapse_btn_close {
+    display: none;
+    transition: height 1s 0.5s ease-in-out;
+}
+
+#collapse_btn_open.active {
+    display: none;
+    transition: height 1s ease-in-out;
+}
+
+#collapse_btn_close.active {
+    display: flex;
     transition: height 1s ease-in-out;
 }
 
