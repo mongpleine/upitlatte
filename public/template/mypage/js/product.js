@@ -28,8 +28,8 @@ window.onload = () => {
     };
 }
 
-function modifyProduct(product_no) {
-    let submit_name = `modify_${product_no}`;
+function modifyProduct(product_id) {
+    let submit_name = `modify_${product_id}`;
     if(confirm("제품 정보를 수정합니다.") === true) {
         document[submit_name].submit();
     }
@@ -38,9 +38,9 @@ function modifyProduct(product_no) {
     }
 }
 
-function delProduct(product_no) {
+function delProduct(product_id) {
     if(confirm("제품 정보를 삭제할까요?") === true) {
-        location.href = `/api/item/del?product_no=${product_no}`;
+        location.href = `/api/item/del?product_id=${product_id}`;
     }
     else {
         return false;

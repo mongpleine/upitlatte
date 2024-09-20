@@ -2,7 +2,7 @@ const model = {
     getItemList (context, {user_id}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
-                    SELECT product_no, product_name, market, keyword, etc
+                    SELECT product_id, product_no, product_name, market, keyword, etc
                     FROM product
                     WHERE user_id = ? AND active = true ORDER BY product_id DESC`;
             let queryValue = [user_id];
@@ -20,6 +20,7 @@ const model = {
                 if (rows.length > 0) {
                     rows.forEach(row => {
                         context.result.push({
+                            product_id: row.product_id,
                             product_no: row.product_no,
                             product_name: row.product_name,
                             market: row.market,
@@ -55,7 +56,7 @@ const model = {
             });
         })
     },
-    modifyItem (context, {product_no, product_name, market, keyword, etc}) {
+    modifyItem (context, {product_id, product_no, product_name, market, keyword, etc}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
                     UPDATE product set etc = ?`;
@@ -74,8 +75,8 @@ const model = {
                 queryValue.push(keyword);
             }
 
-            queryString += "WHERE product_no = ?"
-            queryValue.push(product_no);
+            queryString += "WHERE product_id = ?"
+            queryValue.push(product_id);
 
             context.conn.query(queryString, queryValue, (err, row, fields) => {
                 if (err) {
@@ -90,11 +91,11 @@ const model = {
             });
         })
     },
-    deleteItem (context, {user_id, product_no}) {
+    deleteItem (context, {user_id, product_id, product_no}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
-                    UPDATE product set active = false WHERE user_id = ? AND product_no = ?`;
-            let queryValue = [user_id, product_no];
+                    UPDATE product set active = false WHERE user_id = ? AND product_id = ?`;
+            let queryValue = [user_id, product_id];
 
             context.conn.query(queryString, queryValue, (err, row, fields) => {
                 if (err) {

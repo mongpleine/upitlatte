@@ -77,6 +77,7 @@ const controller = {
         let context = {
             data: {
                 user_id:req.cookies.userdata.user_id,
+                product_id: req.query.product_id,
                 product_no: req.body.product_no || req.query.product_no,
                 product_name: req.body.product_name,
                 market: req.body.market,
@@ -107,6 +108,7 @@ const controller = {
         let context = {
             data: {
                 user_id:req.cookies.userdata.user_id,
+                product_id: req.query.product_id,
                 product_no: req.body.product_no || req.query.product_no
             }
         }

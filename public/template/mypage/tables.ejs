@@ -224,7 +224,7 @@
 
                                                 </a>
                                             </td>
-                                        <form action="/api/item/modify?product_no=<%= product.product_no %>" name="modify_<%= product.product_no %>" method="POST">
+                                        <form action="/api/item/modify?product_id=<%= product.product_id %>" name="modify_<%= product.product_id %>" method="POST">
                                             <td class="product_no_field" style="font-size:13px; vertical-align: middle;">
                                                  <input type="text" readonly="readonly" name="product_no" id="product_no" size="20" style="color:gray; width:100%; border: 0;" autocomplete="off" placeholder="제품번호" value="<%= product.product_no %>" required>
                                             </td>
@@ -236,7 +236,7 @@
                                             <td><textarea rows="1" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="keyword" id="keyword" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.keyword %></textarea></td>
                                             <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="etc" id="etc" rows="<%= product.etc.split(/\r\n|\r|\n/).length %>" style="width:100%; border: 0; resize: none; vertical-align: middle;"><%= product.etc %></textarea></td>
                                             <td>
-                                                <button onclick="modifyProduct(<%= product.product_no %>)" class="btn btn-warning btn-icon-split" style="height: 30px; width: 30px;">
+                                                <button onclick="modifyProduct(<%= product.product_id %>)" class="btn btn-warning btn-icon-split" style="height: 30px; width: 30px;">
                                                     <span class="text" style="display: flex;" title="수정하기">
                                                         <!-- 글자로 -->
 <!--                                                        수정-->
@@ -248,7 +248,7 @@
                                                     </span>
                                                 </button>
                                                 <!-- href="/api/item/del?product_no=<%= product.product_no %>" -->
-                                                <a class="btn btn-danger btn-icon-split" style="height: 30px; width: 30px;" onclick="delProduct(<%= product.product_no %>)">
+                                                <a class="btn btn-danger btn-icon-split" style="height: 30px; width: 30px;" onclick="delProduct(<%= product.product_id %>)">
                                                     <span class="text" style="display: flex; text-align: center; font-size: 12px;" title="삭제하기">
                                                         <!-- 글자로 -->
 <!--                                                        삭제-->
