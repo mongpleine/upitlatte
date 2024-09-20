@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cron = require('node-cron');
 
+const credential = require('./config/credencial');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const cornJobs = require('./controllers/cronJobs/scheduler');
@@ -14,6 +15,8 @@ const app = express();
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'pug');
+
+global.config = credential.config;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, "/public/template/mypage"));
