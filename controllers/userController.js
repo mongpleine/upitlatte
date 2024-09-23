@@ -34,7 +34,6 @@ const controller = {
         }
     },
     join(req, res, next) {
-        console.log("aa");
         let context = {
             data: {
                 email: req.body.email,
@@ -44,24 +43,19 @@ const controller = {
                 eid: req.body.eid
             }
         }
-        console.log(context.data);
 
         try {
             getConnection((conn) => {
-                console.log("bb");
                 context.conn = conn;
                 apiUtils.checkEIDFromOdcloud(context)
                     .then(context => {
-                        console.log("cc");
                         if(!context.eidMatch) {
-                            console.log("dd");
                             context.errorType = "eid";
                             context.result = 403;
                             context.resSend = "<script>alert('유효하지 않은 사업자번호 입니다.'); history.back();</script>";
                             return context;
                             // return res.send("<script>alert('유효하지 않은 사업자번호 입니다.'); history.back();</script>");
                         } else {
-                            console.log("dd");
                             return userModel.joinUser(context, context.data)
                         }
                     })
