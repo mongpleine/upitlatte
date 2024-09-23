@@ -227,7 +227,7 @@ const model = {
                         let tempList = [];
                         for (let i=0; i<7; i++) {
                             let day = moment(startDate).add(i, 'days').format('YYYY-MM-DD');
-                            result.date.push(day);
+                            if (result.date.length < 7) result.date.push(day);
                             if (tempData.length > 0 && day === tempData[0].rank_date) {
                                 tempList.push(tempData[0]);
                                 tempData.shift();

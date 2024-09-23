@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>UPIT SELLING NOTE</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="/template/mypage/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/template/mypage/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/template/mypage/css/product.css">
+
+    <!-- Custom styles for this page -->
+    <link href="/template/mypage/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script type="text/javascript">
+
+    </script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SELLING NOTE</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="/index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/product">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>상품관리</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= data.userdata.username %> 님</span>
+                                <img class="img-profile rounded-circle"
+                                    src="/template/mypage/img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+<!--                                <a class="dropdown-item" href="#">-->
+<!--                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>-->
+<!--                                    Profile-->
+<!--                                </a>-->
+<!--                                <a class="dropdown-item" href="#">-->
+<!--                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>-->
+<!--                                    Settings-->
+<!--                                </a>-->
+<!--                                <a class="dropdown-item" href="#">-->
+<!--                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>-->
+<!--                                    Activity Log-->
+<!--                                </a>-->
+<!--                                <div class="dropdown-divider"></div>-->
+                                <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">상품관리</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <input type="hidden" id="jsonData" value="<%=JSON.stringify(data.products)%>" />
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th width="120px">제품번호</th>
+                                            <th>제품명</th>
+                                            <th width="115px">마켓</th>
+                                            <th>키워드</th>
+                                            <th colspan="2">메모</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <form action="/api/item/add" method="POST">
+                                                <td><input type="text" name="product_no" id="product_no" size="20" style="width:100%; border: 1;" autocomplete="off" placeholder="제품번호" required></td>
+                                                <td><textarea oninput="handleResizeHeight(this)" rows="1" name="product_name" id="product_name" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="제품명"></textarea></td>
+                                                <td><select id="market" name="market" style="width:100%; border:none; border-radius:0; background:url(../) no-repeat 80% 50%;">
+                                                    <option value="coupang">쿠팡</option>
+                                                    <option value="naver">네이버</option>
+                                                </select></td>
+                                                <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" rows="1" name="keyword" id="keyword" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="키워드 '/'로 구분 ex)매트/바닥/욕실"></textarea></td>
+<!--                                                 <td><input type="text" name="keyword" id="keyword" size="20" style="width:100%; border: 1;" autocomplete="off" placeholder="키워드 '/'로 구분 ex)매트/바닥/욕실" required></td> -->
+                                                <td><textarea oninput="handleResizeHeight(this)" name="etc" id="etc" rows="1" style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;" placeholder="메모"></textarea></td>
+                                                <td width="90px">
+                                                    <button type="submit" class="btn btn-success btn-icon-split" style="height: 30px; width: 30px;">
+                                                        <span class="text" style="display: flex;" title="추가하기">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                                            </svg>
+                                                        </span>
+                                                    </button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    <% data.products.forEach( product => { %>
+                                        <tr class="content-container">
+                                            <td width="50px">
+                                                <a id="collapse_btn_field" class="btn btn-light btn-icon-split" onclick="changeTitle(this)">
+                                                    <span class="text" style="display: flex; text-align: center; font-size: 12px;" title="차트 보기">
+                                                        <svg id="collapse_btn_open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-square" viewBox="0 0 16 16">
+                                                            <path d="M3.626 6.832A.5.5 0 0 1 4 6h8a.5.5 0 0 1 .374.832l-4 4.5a.5.5 0 0 1-.748 0z"/>
+                                                            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+                                                        </svg>
+                                                        <svg id="collapse_btn_close" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-square" viewBox="0 0 16 16">
+                                                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                                            <path d="M3.544 10.705A.5.5 0 0 0 4 11h8a.5.5 0 0 0 .374-.832l-4-4.5a.5.5 0 0 0-.748 0l-4 4.5a.5.5 0 0 0-.082.537"/>
+                                                        </svg>
+                                                    </span>
+
+                                                </a>
+                                            </td>
+                                        <form action="/api/item/modify?product_id=<%= product.product_id %>" name="modify_<%= product.product_id %>" method="POST">
+                                            <td class="product_no_field" style="font-size:13px; vertical-align: middle;">
+                                                 <input type="text" readonly="readonly" name="product_no" id="product_no" size="20" style="color:gray; width:100%; border: 0;" autocomplete="off" placeholder="제품번호" value="<%= product.product_no %>" required>
+                                            </td>
+                                            <td class = "product_name_field"><textarea rows="1" valign="middle" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="product_name" id="product_name" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.product_name %></textarea></td>
+                                            <td><select id="market" name="market" style="width:100%; border:none; border-radius:0; background:url(../) no-repeat 80% 50%;">
+                                                <option value="coupang" <% if (product.market == 'coupang') { %> selected <% } %>>쿠팡</option>
+                                                <option value="naver" <% if (product.market == 'naver') { %> selected <% } %>>네이버</option>
+                                            </select></td>
+                                            <td><textarea rows="1" oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="keyword" id="keyword" style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.keyword %></textarea></td>
+                                            <td><textarea oninput="handleResizeHeight(this)" onclick="handleResizeHeight(this)" name="etc" id="etc" rows="<%= product.etc.split(/\r\n|\r|\n/).length %>" style="width:100%; border: 0; resize: none; vertical-align: middle;"><%= product.etc %></textarea></td>
+                                            <td>
+                                                <button onclick="modifyProduct(<%= product.product_id %>)" class="btn btn-warning btn-icon-split" style="height: 30px; width: 30px;">
+                                                    <span class="text" style="display: flex;" title="수정하기">
+                                                        <!-- 글자로 -->
+<!--                                                        수정-->
+
+                                                        <!-- 아이콘으로 -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hammer" viewBox="0 0 16 16">
+                                                            <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5 5 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334"/>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                                <!-- href="/api/item/del?product_no=<%= product.product_no %>" -->
+                                                <a class="btn btn-danger btn-icon-split" style="height: 30px; width: 30px;" onclick="delProduct(<%= product.product_id %>)">
+                                                    <span class="text" style="display: flex; text-align: center; font-size: 12px;" title="삭제하기">
+                                                        <!-- 글자로 -->
+<!--                                                        삭제-->
+
+                                                        <!-- 아이콘으로 -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                                                        </svg>
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </form>
+                                        </tr>
+                                        <tr class="accordion-class">
+                                            <td colspan="7">
+                                                <div class="card shadow mb-4">
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="chart-area">
+                                                            <canvas id="Chart-<%= product.product_no %>"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/template/mypage/vendor/jquery/jquery.min.js"></script>
+    <script src="/template/mypage/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/template/mypage/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/template/mypage/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/template/mypage/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/template/mypage/js/product.js"></script>
+    <script src="/template/mypage/js/chart/chart-area.js"></script>
+
+</body>
+
+</html>
