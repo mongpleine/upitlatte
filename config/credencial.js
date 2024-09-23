@@ -3,7 +3,7 @@ module.exports = {
   app_secret: "$2a$04$ryStHSrEKdImVI7/8eO.UO",
   config: {
     db_selected: "database",
-    rank_limit: 300,
+    rank_limit: 100,
   },
   database: {
     host: "49.247.14.47",
