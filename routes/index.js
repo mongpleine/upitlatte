@@ -49,6 +49,10 @@ router.get('/logout', (req, res, next) => {
   res.clearCookie('userdata').redirect('/login')
 })
 
+router.get('/forgot-password', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/template/mypage/forgot-password.html'));
+})
+
 router.get('/temp', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/template/mypage/temp.ejs'));
 })
