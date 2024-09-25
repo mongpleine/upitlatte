@@ -40,12 +40,14 @@ const controller = {
                             selected = context.result.find(el => {
                                 return Number(el.product_id) === Number(context.data.product_id)
                             })
+                        } else {
+                            selected = context.result[0];
                         }
                         return res.render(`${req._parsedOriginalUrl.pathname.split('/')[1]}.ejs`, {
                             data: {
                                 page: "product",
                                 products: context.result,
-                                selected: selected || "",
+                                selected: selected,
                                 userdata: req.cookies.userdata
                             }
                         })
