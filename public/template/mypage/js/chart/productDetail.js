@@ -174,3 +174,10 @@ $('#dateRangePicker').daterangepicker({
 }, function (start, end, label) {
     location.href = `/productDetail?product_id=${selectedData.product_id}&startDate=${start.format('YYYY-MM-DD')}&endDate=${end.format(('YYYY-MM-DD'))}`
 });
+
+function productSelect(product_id) {
+    let dateRange = document.getElementById('dateRangePicker').value.split(' ~ ');
+    let startDate = dateRange[0];
+    let endDate = dateRange[1];
+    location.href = `/productDetail?product_id=${product_id}&startDate=${startDate}&endDate=${endDate}`;
+}
