@@ -140,7 +140,6 @@ let myLineChart = new Chart(ctx, {
             yPadding: 15,
             intersect: false,
             caretPadding: 10,
-            mode: 'index',
             callbacks: {
                 label: function(tooltipItem, chart) {
                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
