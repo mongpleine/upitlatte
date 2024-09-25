@@ -32,6 +32,11 @@ router.get('/product',
   api.item.getItemList
 )
 
+router.get('/productDetail',
+    api.user.authCheck,
+    api.item.getItemList
+)
+
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/template/mypage/login.html'));
 })

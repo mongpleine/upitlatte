@@ -6,21 +6,26 @@ const moment = require("moment");
 
 const controller = {
     getItemList(req, res, next) {
+        let defaultStartDate = moment(new Date()).subtract(6, 'days').format('YYYY-MM-DD');
+        let defaultEndDate = moment(new Date()).format('YYYY-MM-DD');
         let context = {
             data: {
                 user_id: req.cookies.userdata.user_id,
+                startDate: req.query.startDate || defaultStartDate,
+                endDate: req.query.endDate || defaultEndDate,
+                product_id: req.query.product_id || ""
             }
         }
+
+        context.data.dayDiff = Math.abs(moment(context.data.startDate).diff(context.data.endDate, "days"));
 
         try {
             getConnection(conn => {
                 context.conn = conn;
                 itemModel.getItemList(context, context.data)
                     .then(context => {
-                        if (context.product_list.length > 0) {
-                            let startDate = moment(new Date()).subtract(6, 'days').format('YYYY-MM-DD');
-                            let endDate = moment(new Date()).format('YYYY-MM-DD');
-                            return shopDataModel.getProductRank(context, {startDate: startDate, endDate: endDate});
+                        if (context.data.product_list.length > 0) {
+                            return shopDataModel.getProductRank(context, context.data);
                         } else {
                             return context;
                         }
@@ -30,10 +35,17 @@ const controller = {
                         return context;
                     })
                     .then(context => {
-                        return res.render('tables.ejs', {
+                        let selected;
+                        if (context.data.product_id !== "") {
+                            selected = context.result.find(el => {
+                                return Number(el.product_id) === Number(context.data.product_id)
+                            })
+                        }
+                        return res.render(`${req._parsedOriginalUrl.pathname.split('/')[1]}.ejs`, {
                             data: {
                                 page: "product",
                                 products: context.result,
+                                selected: selected || "",
                                 userdata: req.cookies.userdata
                             }
                         })

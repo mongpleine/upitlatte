@@ -15,7 +15,7 @@ const model = {
                 }
 
                 context.result = [];
-                context.product_list = [];
+                context.data.product_list = [];
 
                 if (rows.length > 0) {
                     rows.forEach(row => {
@@ -27,7 +27,7 @@ const model = {
                             keyword: row.keyword,
                             etc: row.etc || ""
                         });
-                        context.product_list.push(row.product_no);
+                        context.data.product_list.push(row.product_no);
                     })
                 }
 

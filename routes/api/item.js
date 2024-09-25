@@ -20,6 +20,11 @@ module.exports = function () {
         api.item.getItemList
     )
 
+    router.get('/item/detail',
+        api.user.authCheck,
+        api.item.getItemList
+    )
+
     router.get('/item/del',
         api.user.authCheck,
         api.item.deleteItem

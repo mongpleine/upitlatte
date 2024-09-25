@@ -182,13 +182,13 @@ const model = {
         });
     },
 
-    getProductRank (context, {startDate, endDate}) {
+    getProductRank (context, {product_list, startDate, endDate, dayDiff}) {
         return new Promise((resolved, rejected) => {
             let queryString = `
                     SELECT pl_product_id, pl_product_no as product_no, keyword, ranking, date_format(rank_date, '%Y-%m-%d') as rank_date
                     FROM product_rank
                     WHERE rank_date >= ? AND rank_date <= ? AND pl_product_no in ? ORDER BY keyword, pl_product_id, rank_date ASC`;
-            let queryValue = [startDate, endDate, [context.product_list]];
+            let queryValue = [startDate, endDate, [product_list]];
 
             context.conn.query(queryString, queryValue, (err, rows, fields) => {
                 if (err) {
@@ -225,9 +225,9 @@ const model = {
                             return data.keyword === keyword;
                         })
                         let tempList = [];
-                        for (let i=0; i<7; i++) {
+                        for (let i=0; i<=dayDiff; i++) {
                             let day = moment(startDate).add(i, 'days').format('YYYY-MM-DD');
-                            if (result.date.length < 7) result.date.push(day);
+                            if (result.date.length <= dayDiff) result.date.push(day);
                             if (tempData.length > 0 && day === tempData[0].rank_date) {
                                 tempList.push(tempData[0]);
                                 tempData.shift();
