@@ -13,5 +13,9 @@ module.exports = function () {
         api.user.join
     )
 
+    router.post('/user/forgot-password',
+        api.user.forgotPassword
+    )
+
     return router;
 }

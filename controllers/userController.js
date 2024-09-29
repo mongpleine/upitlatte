@@ -33,6 +33,7 @@ const controller = {
             next(err);
         }
     },
+
     join(req, res, next) {
         let context = {
             data: {
@@ -50,11 +51,9 @@ const controller = {
                 apiUtils.checkEIDFromOdcloud(context)
                     .then(context => {
                         if(!context.eidMatch) {
-                            context.errorType = "eid";
-                            context.result = 403;
-                            context.resSend = "<script>alert('유효하지 않은 사업자번호 입니다.'); history.back();</script>";
+                            context.statusCode = 500;
+                            context.errorMessage = "유효하지 않은 사업자번호입니다.";
                             return context;
-                            // return res.send("<script>alert('유효하지 않은 사업자번호 입니다.'); history.back();</script>");
                         } else {
                             return userModel.joinUser(context, context.data)
                         }
@@ -64,22 +63,15 @@ const controller = {
                         return context;
                     })
                     .then(context => {
-                        if (context.result === 200) {
+                        if (context.statusCode === 200) {
                             res.statusCode = 200;
                             return res.redirect('/login');
                         } else {
-                            res.statusCode = 403;
-                            let resSend = "resSend" in context ? context.resSend :
-                                "<script>alert('이미 가입한 메일주소 입니다.'); history.back();</script>"
-                            // switch (context.errorType) {
-                            //     case "eid":
-                            //         resSend = "<script>alert('유효하지 않은 사업자번호 입니다.'); history.back();</script>";
-                            //         break;
-                            //
-                            // }
-                            // return res.send("<script>alert('이미 가입한 메일주소 입니다.'); history.back();</script>");
+                            res.statusCode = 500;
+                            let resSend = context.errorMessage ?
+                                `<script>alert('${context.errorMessage}'); history.back();</script>`:
+                                `<script>alert('잘못된 데이터입니다.'); history.back();</script>`;
                             return res.send(resSend);
-                            // return res.redirect('/join');
                         }
                     });
             })
@@ -87,6 +79,7 @@ const controller = {
             next(err);
         }
     },
+
     authCheck(req, res, next) {
         let context = {
             data: {}
@@ -115,6 +108,36 @@ const controller = {
                         }
                     });
             });
+        } catch (err) {
+            next(err);
+        }
+    },
+
+    forgotPassword (req, res, next) {
+        let context = {
+            data: {
+                eid: req.body.eid
+            }
+        }
+        try {
+            getConnection((conn) => {
+                context.conn = conn;
+                userModel.resetPassword(context, context.data)
+                    .then(context => {
+                        context.conn.release();
+                        return context;
+                    })
+                    .then(context => {
+                        if (context.statusCode) {
+                            res.statusCode = 200;
+                            return res.send(`<script>alert('${context.message}'); location.href="/login";</script>`)
+                        } else {
+                            res.statusCode = 403;
+                            return res.send(`<script>alert('${context.message}'); history.back();</script>`)
+                            // return res.redirect('/login');
+                        }
+                    });
+            })
         } catch (err) {
             next(err);
         }
