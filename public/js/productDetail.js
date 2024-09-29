@@ -131,7 +131,7 @@ let myLineChart = new Chart(ctx, {
             }],
         },
         legend: {
-            display: false
+            display: true
         },
         tooltips: {
             backgroundColor: "rgb(255,255,255)",
@@ -145,16 +145,11 @@ let myLineChart = new Chart(ctx, {
             yPadding: 15,
             intersect: false,
             caretPadding: 10,
+            labelColors: lineColors,
             callbacks: {
                 label: function(tooltipItem, chart) {
                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                     return ` ${datasetLabel}: ${number_format(tooltipItem.yLabel)}`;
-                },
-                labelColor: function (tooltipItem) {
-                    return {
-                        borderColor: tooltipItem.datasetIndex > 10 ? lineColors[11] : lineColors[tooltipItem.datasetIndex],
-                        backgroundColor: tooltipItem.datasetIndex > 10 ? lineColors[11] : lineColors[tooltipItem.datasetIndex]
-                    };
                 }
             }
         }
