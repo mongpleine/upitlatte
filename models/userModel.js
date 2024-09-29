@@ -123,6 +123,39 @@ const model = {
         })
     },
 
+    modifyProfile (context, {user_id, email, tel, password}) {
+        return new Promise((resolved, rejected) => {
+            let queryString = `UPDATE users set tel = ? `;
+            let queryValue = [tel];
+
+            if (password !== "") {
+                queryString += 'password = ? ';
+                queryValue.push(password);
+            }
+
+            queryString += 'WHERE user_id = ? AND email = ?';
+            queryValue = [...queryValue, user_id, email];
+
+            context.conn.query(queryString, queryValue, (err, row, fields) => {
+                if (err) {
+                    const error = new Error(err);
+                    error.status = 500;
+                    return rejected({ context, error });
+                }
+                if (row.affectedRows > 0) {
+                    context.statusCode = 200;
+                    context.message = "회원정보가 수정되었습니다."
+                }
+                else {
+                    context.statusCode = 400;
+                    context.message = "에러가 발생했습니다.";
+                }
+
+                return resolved(context);
+            });
+        })
+    },
+
     getUserTel (context, {user_id}) {
         return new Promise((resolved, rejected) => {
             let queryString = `

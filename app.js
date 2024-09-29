@@ -19,7 +19,7 @@ const app = express();
 global.config = credential.config;
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, "/public/template/mypage"));
+app.set('views', path.join(__dirname, "/public/ejs"));
 app.engine('html', require('ejs').renderFile);
 
 app.get('/test', (req, res) => {

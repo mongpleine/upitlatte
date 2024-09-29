@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('header.ejs') %>
+</head>
+
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <%- include('sidebar.ejs') %>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <%- include('topbar.ejs') %>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">상품관리</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <input type="hidden" id="jsonData" value="<%= JSON.stringify(data.products) %>"/>
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th width="120px">제품번호</th>
+                                        <th>제품명</th>
+                                        <th width="115px">마켓</th>
+                                        <th>키워드</th>
+                                        <th colspan="2">메모</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <td></td>
+                                    <form action="/api/item/add" method="POST">
+                                        <td><input type="text" name="product_no" id="product_no" size="20"
+                                                   style="width:100%; border: 1;" autocomplete="off" placeholder="제품번호"
+                                                   required></td>
+                                        <td><textarea oninput="handleResizeHeight(this)" rows="1" name="product_name"
+                                                      id="product_name"
+                                                      style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"
+                                                      placeholder="제품명"></textarea></td>
+                                        <td><select id="market" name="market"
+                                                    style="width:100%; border:none; border-radius:0; background:url(../) no-repeat 80% 50%;">
+                                                <option value="coupang">쿠팡</option>
+                                                <option value="naver">네이버</option>
+                                            </select></td>
+                                        <td><textarea oninput="handleResizeHeight(this)"
+                                                      onclick="handleResizeHeight(this)" rows="1" name="keyword"
+                                                      id="keyword"
+                                                      style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"
+                                                      placeholder="키워드 '/'로 구분 ex)매트/바닥/욕실"></textarea></td>
+                                        <!--                                                 <td><input type="text" name="keyword" id="keyword" size="20" style="width:100%; border: 1;" autocomplete="off" placeholder="키워드 '/'로 구분 ex)매트/바닥/욕실" required></td> -->
+                                        <td><textarea oninput="handleResizeHeight(this)" name="etc" id="etc" rows="1"
+                                                      style="width:100%; border: 1; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"
+                                                      placeholder="메모"></textarea></td>
+                                        <td width="90px">
+                                            <button type="submit" class="btn btn-success btn-icon-split"
+                                                    style="height: 30px; width: 30px;">
+                                                <span class="text" style="display: flex;" title="추가하기">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor" class="bi bi-plus-circle"
+                                                         viewBox="0 0 16 16">
+                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </td>
+                                    </form>
+                                </tr>
+                                <% data.products.forEach( product => { %>
+                                    <tr class="content-container">
+                                        <td width="50px">
+                                            <a id="collapse_btn_field" class="btn btn-light btn-icon-split"
+                                               onclick="changeTitle(this)">
+                                                <span class="text"
+                                                      style="display: flex; text-align: center; font-size: 12px;"
+                                                      title="차트 보기">
+                                                    <svg id="collapse_btn_open"
+                                                         xmlns="http://www.w3.org/2000/svg" width="16"
+                                                         height="16" fill="currentColor"
+                                                         class="bi bi-caret-down-square" viewBox="0 0 16 16">
+                                                        <path d="M3.626 6.832A.5.5 0 0 1 4 6h8a.5.5 0 0 1 .374.832l-4 4.5a.5.5 0 0 1-.748 0z"/>
+                                                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+                                                    </svg>
+                                                    <svg id="collapse_btn_close"
+                                                         xmlns="http://www.w3.org/2000/svg" width="16"
+                                                         height="16" fill="currentColor"
+                                                         class="bi bi-caret-up-square" viewBox="0 0 16 16">
+                                                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                                        <path d="M3.544 10.705A.5.5 0 0 0 4 11h8a.5.5 0 0 0 .374-.832l-4-4.5a.5.5 0 0 0-.748 0l-4 4.5a.5.5 0 0 0-.082.537"/>
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                        </td>
+                                        <form action="/api/item/modify?product_id=<%= product.product_id %>"
+                                              name="modify_<%= product.product_id %>" method="POST">
+                                            <td class="product_no_field"
+                                                style="font-size:13px; vertical-align: middle;">
+                                                <input type="text" readonly="readonly" name="product_no" id="product_no"
+                                                       size="20" style="color:gray; width:100%; border: 0;"
+                                                       autocomplete="off" placeholder="제품번호"
+                                                       value="<%= product.product_no %>" required>
+                                            </td>
+                                            <td class="product_name_field"><textarea rows="1" valign="middle"
+                                                                                     oninput="handleResizeHeight(this)"
+                                                                                     onclick="handleResizeHeight(this)"
+                                                                                     name="product_name"
+                                                                                     id="product_name"
+                                                                                     style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.product_name %></textarea>
+                                            </td>
+                                            <td><select id="market" name="market"
+                                                        style="width:100%; border:none; border-radius:0; background:url(../) no-repeat 80% 50%;">
+                                                    <option value="coupang"
+                                                    <% if (product.market == 'coupang') { %> selected
+                                                            <% } %>
+                                                    >쿠팡
+                                                    </option>
+                                                    <option value="naver"
+                                                    <% if (product.market == 'naver') { %> selected
+                                                            <% } %>
+                                                    >네이버
+                                                    </option>
+                                                </select></td>
+                                            <td><textarea rows="1" oninput="handleResizeHeight(this)"
+                                                          onclick="handleResizeHeight(this)" name="keyword" id="keyword"
+                                                          style="width:100%; border: 0; word-break:break-all; overflow:hidden; resize: none; vertical-align: middle;"><%= product.keyword %></textarea>
+                                            </td>
+                                            <td><textarea oninput="handleResizeHeight(this)"
+                                                          onclick="handleResizeHeight(this)" name="etc" id="etc"
+                                                          rows="<%= product.etc.split(/\r\n|\r|\n/).length %>"
+                                                          style="width:100%; border: 0; resize: none; vertical-align: middle;"><%= product.etc %></textarea>
+                                            </td>
+                                            <td>
+                                                <button onclick="modifyProduct(<%= product.product_id %>)"
+                                                        class="btn btn-warning btn-icon-split"
+                                                        style="height: 30px; width: 30px;">
+                                                    <span class="text" style="display: flex;" title="수정하기">
+                                                        <!-- 글자로 -->
+                                                        <!-- 수정-->
+
+                                                        <!-- 아이콘으로 -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                             height="16" fill="currentColor" class="bi bi-hammer"
+                                                             viewBox="0 0 16 16">
+                                                            <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5 5 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334"/>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                                <!-- href="/api/item/del?product_no=<%= product.product_no %>" -->
+                                                <a class="btn btn-danger btn-icon-split"
+                                                   style="height: 30px; width: 30px;"
+                                                   onclick="delProduct(<%= product.product_id %>)">
+                                                    <span class="text"
+                                                          style="display: flex; text-align: center; font-size: 12px;"
+                                                          title="삭제하기">
+                                                        <!-- 글자로 -->
+                                                        <!-- 삭제-->
+
+                                                        <!-- 아이콘으로 -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                             height="16" fill="currentColor"
+                                                             class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                                                        </svg>
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    <tr class="accordion-class">
+                                        <td colspan="7">
+                                            <div class="card shadow mb-4">
+                                                <div class="card-header py-3">
+                                                    <h6 class="m-0 font-weight-bold text-primary"
+                                                        style="display: inline-block">키워드별 순위정보</h6>
+                                                    <a href="/productDetail?product_id=<%= product.product_id %>"
+                                                       class="btn btn-light btn-icon-split btn-sm"
+                                                       style="display: inline-block; float: right;">
+                                                            <span class="icon text-gray-600">
+                                                                <i class="fas fa-arrow-right"></i>
+                                                            </span>
+                                                        <span class="text">랭킹분석</span>
+                                                    </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="chart-area">
+                                                        <canvas id="Chart-<%= product.product_no %>"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <%- include('footer.ejs') %>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<%- include('defaultScripts.ejs') %>
+
+<!-- Page level plugins -->
+<script src="/template/mypage/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="/js/product.js"></script>
+</body>
+
+</html>

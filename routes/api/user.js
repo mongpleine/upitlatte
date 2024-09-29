@@ -17,5 +17,10 @@ module.exports = function () {
         api.user.forgotPassword
     )
 
+    router.post('/user/modifyProfile',
+        api.user.authCheck,
+        api.user.modify
+    )
+
     return router;
 }

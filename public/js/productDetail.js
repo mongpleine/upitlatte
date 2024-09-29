@@ -49,7 +49,7 @@ if (jsonData.selected !== "") {
 } else {
     selectedData = jsonData.products[0];
 }
-console.log(selectedData);
+
 let labels = selectedData.date;
 let ranking = [];
 

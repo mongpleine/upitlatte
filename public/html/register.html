@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Register</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/template/mypage/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/template/mypage/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form action="/api/user/join" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user"
+                                           autocomplete="off" required pattern="^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}"
+                                           name="name" id="name" placeholder="성명">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user"
+                                           required pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*"
+                                           name="email" id="email" placeholder="이메일">
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user"
+                                            name="pw" id="pw" placeholder="Password" onchange="validatePassword()">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user"
+                                            name="pwc" id="pwc" placeholder="Repeat Password" onkeyup="validatePassword()">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user"
+                                           autocomplete="off" required pattern="(010)\d{8}"
+                                           name="tel" id="tel" placeholder="휴대전화">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user"
+                                           autocomplete="off" required
+                                           name="eid" id="eid" placeholder="사업자번호">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
+                            </form>
+                            <hr>
+<!--                            <div class="text-center">-->
+<!--                                <a class="small" href="./forgot-password.html">Forgot Password?</a>-->
+<!--                            </div>-->
+                            <div class="text-center">
+                                <a class="small" href="/login">로그인</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        var password = document.getElementById("pw")
+            , confirm_password = document.getElementById("pwc");
+
+        function validatePassword(){
+            if(password.value != confirm_password.value) {
+                console.log("불일치");
+                confirm_password.setCustomValidity("비밀번호가 일치하지 않습니다.");
+                confirm_password.reportValidity();
+            } else {
+                console.log("일치");
+                confirm_password.setCustomValidity(''); // 오류가 없으면 메시지를 빈 문자열로 설정해야한다. 오류 메시지가 비어 있지 않은 한 양식은 유효성 검사를 통과하지 않고 제출되지 않는다.
+                confirm_password.reportValidity();
+            }
+        }
+    </script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/template/mypage/vendor/jquery/jquery.min.js"></script>
+    <script src="/template/mypage/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/template/mypage/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/template/mypage/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>

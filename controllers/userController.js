@@ -143,6 +143,45 @@ const controller = {
         }
     },
 
+    modify(req, res, next) {
+        let context = {
+            data: {
+                user_id: req.query.user_id,
+                email: req.body.email,
+                password: req.body.pw || "",
+                name: req.body.name,
+                tel: req.body.tel,
+                eid: req.body.eid
+            }
+        }
+
+        context.cookie = req.cookies.userdata;
+
+        try {
+            getConnection((conn) => {
+                context.conn = conn;
+                userModel.modifyProfile(context, context.data)
+                    .then(context => {
+                        if (context.data.password !== "") return userModel.checkUser(context, context.data);
+                        else {
+                            context.cookie.tel = context.data.tel;
+                            context.result = context.cookie;
+                            return context
+                        };
+                    })
+                    .then(context => {
+                        context.conn.release();
+                        return context;
+                    })
+                    .then(context => {
+                        return res.cookie("userdata", context.result).send(`<script>alert('${context.message}'); history.back();</script>`)
+                    })
+            });
+        } catch (err) {
+            next(err);
+        }
+    },
+
     defaultFunc(req, res, next) {
         let context = {
             data: {}
