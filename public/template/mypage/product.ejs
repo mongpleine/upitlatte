@@ -273,7 +273,13 @@
                                         <td colspan="7">
                                             <div class="card shadow mb-4">
                                                 <div class="card-header py-3">
-                                                    <h6 class="m-0 font-weight-bold text-primary">키워드별 순위정보</h6>
+                                                    <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block">키워드별 순위정보</h6>
+                                                    <a href="/productDetail?product_id=<%= product.product_id %>" class="btn btn-primary btn-icon-split btn-sm" style="display: inline-block; float: right;">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-flag"></i>
+                                                        </span>
+                                                        <span class="text">랭킹분석</span>
+                                                    </a>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="chart-area">
@@ -300,7 +306,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
+                    <span>Copyright &copy; Sellingnote 2024</span>
                 </div>
             </div>
         </footer>
