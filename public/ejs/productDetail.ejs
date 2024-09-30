@@ -34,7 +34,7 @@
                         <a class="nav-link dropdown-toggle" style="height: 30px; display: inline-block" href="#"
                            id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-size: 100%;">
                                 제품명 :
                                 <% if (data.selected !== "") { %>
                                     <%= data.selected.product_name %>
@@ -54,7 +54,7 @@
                             <% }) %>
                         </div>
 
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-size: 100%; text-align: center;">
                             키워드 :
                         </span>
                         <select class="selectpicker text-gray-600" multiple data-actions-box="true"
