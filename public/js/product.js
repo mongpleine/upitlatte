@@ -86,7 +86,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Area Chart Example
 let jsonData = JSON.parse(document.getElementById("jsonData").value);
-console.log(jsonData);
+
 let lineColors = [
     "rgba(78, 115, 223, 1)",
     "rgba(72, 209, 204, 1)",
@@ -100,20 +100,18 @@ jsonData.forEach(data => {
     let ranking = [];
     let dataLimit = data.rankData.length >= 5 ? 5 : data.rankData.length;
 
-    let ranking_ = [];
-
     for (let i = 0; i < data.rankData.length; i++) {
         let color = lineColors[i];
 
         let rankArray = [];
 
         let keyword = "";
-        data.rankData[i].forEach(data => {
-            keyword = data.keyword;
-            rankArray.push(data.rank === '-' ? 100 : data.rank);
+        data.rankData[i].forEach(rankData => {
+            keyword = data.keyword_list[i];
+            rankArray.push(rankData.rank === '-' ? 100 : rankData.rank);
         });
 
-        ranking_.push({
+        ranking.push({
             label: keyword,
             lineTension: 0.3,
             borderColor: color,
@@ -128,17 +126,12 @@ jsonData.forEach(data => {
         });
     }
 
-    data.rankData[0].forEach(rankData => {
-        // labels.push(rankData.rank_date);
-        ranking.push(rankData.rank === '-' ? 300 : rankData.rank);
-    });
-
     let ctx = document.getElementById("Chart-" + data.product_no);
     let myLineChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
-            datasets: ranking_,
+            datasets: ranking,
         },
         options: {
             maintainAspectRatio: false,
