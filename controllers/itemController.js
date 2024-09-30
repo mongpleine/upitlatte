@@ -74,6 +74,18 @@ const controller = {
         try {
             getConnection(conn => {
                 context.conn = conn;
+                let keyword_limit = global.config.keyword_limit !== undefined ? Number(global.config.keyword_limit) : 50;
+                if (context.data.keyword.includes('/')) {
+                    let keywords = context.data.keyword.split(/\//g);
+                    if (keywords.length > keyword_limit) {
+                        context.data.keyword = keywords.slice(0, keyword_limit).join(",");
+                    }
+                } else if (context.data.keyword.includes(',')) {
+                    let keywords = context.data.keyword.split(/,/g);
+                    if (keywords.length > keyword_limit) {
+                        context.data.keyword = keywords.slice(0, keyword_limit).join(",");
+                    }
+                }
                 itemModel.addItem(context, context.data)
                     .then(context => {
                         context.conn.release();

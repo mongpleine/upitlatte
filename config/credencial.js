@@ -4,6 +4,7 @@ module.exports = {
   config: {
     db_selected: "database",
     rank_limit: 100,
+    keyword_limit: 50,
   },
   database: {
     host: "49.247.14.47",
